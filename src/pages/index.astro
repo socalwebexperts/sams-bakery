@@ -1,11 +1,256 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { portfolioItems } from "../data/portfolio";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const featuredProjects = portfolioItems.slice(0, 4);
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Home">
+  <!-- Hero Section -->
+  <section class="relative h-screen flex items-end overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80"
+        alt="Architectural masterpiece"
+        class="h-full w-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/40 to-stone-950/20"></div>
+      <div class="absolute inset-0 bg-stone-950/30"></div>
+    </div>
+
+    <div class="relative z-10 mx-auto max-w-[1400px] w-full px-6 lg:px-12 pb-20 lg:pb-28">
+      <div class="max-w-3xl">
+        <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-stone-400 mb-6 animate-fade-in" style="animation-delay: 0.3s">
+          Architecture &middot; Plans &middot; Permitting &middot; Consulting
+        </p>
+        <h1 class="font-[Playfair_Display] text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-medium leading-[0.95] text-white animate-fade-up" style="animation-delay: 0.5s">
+          Designing<br />
+          <span class="italic font-normal text-stone-300">Excellence</span>
+        </h1>
+        <p class="mt-8 max-w-xl text-base lg:text-lg leading-relaxed text-stone-400 font-light animate-fade-up" style="animation-delay: 0.8s">
+          A trusted partner for discerning clients who demand architectural
+          vision, engineering precision, and full regulatory confidence.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-4 animate-fade-up" style="animation-delay: 1s">
+          <a
+            href="/contact"
+            class="inline-flex items-center gap-3 bg-white text-stone-950 px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-stone-200"
+          >
+            Free Consultation
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </a>
+          <a
+            href="/portfolio"
+            class="inline-flex items-center gap-3 border border-stone-600 text-stone-300 px-8 py-4 text-[12px] font-semibold uppercase tracking-[0.15em] transition-all duration-300 hover:border-white hover:text-white"
+          >
+            View Work
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-fade-in" style="animation-delay: 1.5s">
+      <div class="flex flex-col items-center gap-2 text-stone-500">
+        <span class="text-[9px] uppercase tracking-[0.3em]">Scroll</span>
+        <div class="w-px h-8 bg-gradient-to-b from-stone-500 to-transparent animate-pulse"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro / Tagline -->
+  <section class="py-32 lg:py-40">
+    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div class="max-w-4xl mx-auto text-center reveal-on-scroll">
+        <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-8">About Our Studio</p>
+        <h2 class="font-[Playfair_Display] text-3xl md:text-4xl lg:text-5xl font-normal leading-snug text-white">
+          We deliver more than plans — we deliver
+          <span class="italic">peace of mind</span>
+        </h2>
+        <p class="mt-8 text-base lg:text-lg leading-relaxed text-stone-400 font-light max-w-2xl mx-auto">
+          Our team blends architectural vision with rigorous engineering and permitting
+          expertise, ensuring every project is executed with precision, sophistication,
+          and full regulatory confidence.
+        </p>
+        <a
+          href="/about"
+          class="inline-flex items-center gap-2 mt-10 text-[12px] font-medium uppercase tracking-[0.15em] text-stone-400 hover:text-white transition-colors duration-300"
+        >
+          Learn More
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects -->
+  <section class="py-20 lg:py-28">
+    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div class="flex items-end justify-between mb-16 reveal-on-scroll">
+        <div>
+          <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-4">Selected Work</p>
+          <h2 class="font-[Playfair_Display] text-3xl md:text-4xl lg:text-5xl font-normal text-white">
+            Recent Projects
+          </h2>
+        </div>
+        <a
+          href="/portfolio"
+          class="hidden md:inline-flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.15em] text-stone-400 hover:text-white transition-colors duration-300"
+        >
+          View All Projects
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+        {featuredProjects.map((project, i) => (
+          <a
+            href={`/portfolio/${project.slug}`}
+            class:list={[
+              "group relative overflow-hidden reveal-on-scroll",
+              i === 0 ? "md:col-span-2 aspect-[21/9]" : "aspect-[4/3]",
+            ]}
+            style={`transition-delay: ${i * 0.1}s`}
+          >
+            <img
+              src={project.thumbnail}
+              alt={project.title}
+              class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500"></div>
+            <div class="absolute inset-0 flex flex-col justify-end p-6 lg:p-10">
+              <div class="transform transition-transform duration-500 group-hover:translate-y-0 translate-y-2">
+                <p class="text-[10px] font-medium uppercase tracking-[0.25em] text-stone-400 mb-2">
+                  {project.category} &middot; {project.status}
+                </p>
+                <h3 class="font-[Playfair_Display] text-xl lg:text-2xl font-normal text-white">
+                  {project.title}
+                </h3>
+                <p class="text-sm text-stone-400 mt-1">{project.location}</p>
+                <div class="mt-4 flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.15em] text-stone-400 group-hover:text-white transition-colors duration-300">
+                  <span>View Project</span>
+                  <svg class="w-3.5 h-3.5 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="mt-10 text-center md:hidden">
+        <a
+          href="/portfolio"
+          class="inline-flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.15em] text-stone-400 hover:text-white transition-colors duration-300"
+        >
+          View All Projects
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="py-20 lg:py-28 border-t border-stone-800/50">
+    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div class="text-center mb-20 reveal-on-scroll">
+        <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-4">What We Do</p>
+        <h2 class="font-[Playfair_Display] text-3xl md:text-4xl lg:text-5xl font-normal text-white">
+          Our Services
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-px bg-stone-800/30">
+        {[
+          {
+            title: "Architecture",
+            desc: "Comprehensive architectural design from concept through construction documentation, tailored to your vision.",
+            icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M2 22h20M12 2l10 10H2L12 2zM5 12v10M19 12v10M9 22v-5a3 3 0 016 0v5" />`,
+          },
+          {
+            title: "Plans",
+            desc: "Detailed construction drawings and documentation that translate design intent into buildable reality.",
+            icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />`,
+          },
+          {
+            title: "Permitting",
+            desc: "Expert navigation of regulatory frameworks and city agencies to ensure smooth project approvals.",
+            icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />`,
+          },
+          {
+            title: "Consulting",
+            desc: "Strategic guidance on feasibility, entitlements, and value engineering for informed decision-making.",
+            icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />`,
+          },
+          {
+            title: "Tutorials",
+            desc: "Educational resources and hands-on workshops sharing our expertise with the next generation of designers.",
+            icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />`,
+          },
+        ].map((service, i) => (
+          <div
+            class="bg-stone-950 p-8 lg:p-10 text-center reveal-on-scroll group hover:bg-stone-900/50 transition-colors duration-500"
+            style={`transition-delay: ${i * 0.1}s`}
+          >
+            <div class="inline-flex items-center justify-center w-12 h-12 mb-6">
+              <svg class="w-8 h-8 text-accent group-hover:text-accent-light transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" set:html={service.icon} />
+            </div>
+            <h3 class="text-sm font-semibold uppercase tracking-[0.15em] text-white mb-3">{service.title}</h3>
+            <p class="text-sm leading-relaxed text-stone-500">{service.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="py-20 lg:py-28">
+    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 reveal-on-scroll">
+        {[
+          { number: "150+", label: "Projects Completed" },
+          { number: "12+", label: "Years Experience" },
+          { number: "100%", label: "Permit Approval Rate" },
+          { number: "50+", label: "Satisfied Clients" },
+        ].map((stat) => (
+          <div class="text-center py-8">
+            <span class="font-[Playfair_Display] text-4xl md:text-5xl lg:text-6xl font-normal text-white">{stat.number}</span>
+            <p class="mt-3 text-[11px] font-medium uppercase tracking-[0.2em] text-stone-500">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="relative py-32 lg:py-44 overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80"
+        alt="Architecture detail"
+        class="h-full w-full object-cover"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-stone-950/80"></div>
+    </div>
+
+    <div class="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-12 text-center">
+      <div class="max-w-2xl mx-auto reveal-on-scroll">
+        <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-6">Start Your Project</p>
+        <h2 class="font-[Playfair_Display] text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-snug">
+          Ready to bring your vision to life?
+        </h2>
+        <p class="mt-6 text-base leading-relaxed text-stone-400 font-light">
+          In a market where timing and compliance are everything, acting now ensures
+          you secure today's advantages in cost, value, and entitlement.
+        </p>
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-3 mt-10 bg-white text-stone-950 px-10 py-4 text-[12px] font-semibold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-stone-200"
+        >
+          Free Consultation
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+        </a>
+      </div>
+    </div>
+  </section>
 </Layout>

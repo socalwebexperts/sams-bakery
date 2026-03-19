@@ -1,0 +1,164 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { portfolioItems, type PortfolioItem } from "../../data/portfolio";
+
+export function getStaticPaths() {
+  return portfolioItems.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: PortfolioItem;
+}
+
+const { project } = Astro.props;
+
+const relatedProjects = portfolioItems
+  .filter((p) => p.category === project.category && p.slug !== project.slug)
+  .slice(0, 2);
+---
+
+<Layout title={project.title} description={project.description}>
+  <!-- Hero -->
+  <section class="relative h-[70vh] lg:h-[80vh] flex items-end overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src={project.heroImage}
+        alt={project.title}
+        class="h-full w-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/30 to-transparent"></div>
+    </div>
+
+    <div class="relative z-10 mx-auto max-w-[1400px] w-full px-6 lg:px-12 pb-16 lg:pb-24">
+      <a
+        href="/portfolio"
+        class="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.2em] text-stone-400 hover:text-white transition-colors duration-300 mb-8 animate-fade-in"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16l-4-4m0 0l4-4m-4 4h18" /></svg>
+        Back to Portfolio
+      </a>
+
+      <div class="max-w-3xl">
+        <p class="text-[11px] font-medium uppercase tracking-[0.25em] text-accent mb-4 animate-fade-up">
+          {project.category} &middot; {project.status}
+        </p>
+        <h1 class="font-[Playfair_Display] text-4xl md:text-5xl lg:text-6xl font-medium leading-[1] text-white animate-fade-up" style="animation-delay: 0.1s">
+          {project.title}
+        </h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Details -->
+  <section class="py-20 lg:py-28">
+    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+        <!-- Sidebar Info -->
+        <div class="lg:col-span-4 order-2 lg:order-1">
+          <div class="lg:sticky lg:top-32 space-y-8">
+            <div>
+              <h4 class="text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">Location</h4>
+              <p class="text-base text-white">{project.location}</p>
+            </div>
+            <div>
+              <h4 class="text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">Year</h4>
+              <p class="text-base text-white">{project.year}</p>
+            </div>
+            <div>
+              <h4 class="text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">Status</h4>
+              <p class="text-base text-white">{project.status}</p>
+            </div>
+            <div>
+              <h4 class="text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">Scope</h4>
+              <ul class="space-y-1.5">
+                {project.scope.map((s) => (
+                  <li class="text-sm text-stone-300">{s}</li>
+                ))}
+              </ul>
+            </div>
+            <div class="pt-4 border-t border-stone-800/50">
+              <a
+                href="/contact"
+                class="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-accent hover:text-accent-light transition-colors duration-300"
+              >
+                Discuss a Similar Project
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="lg:col-span-8 order-1 lg:order-2">
+          <p class="text-lg lg:text-xl leading-relaxed text-stone-300 font-light mb-8 reveal-on-scroll">
+            {project.description}
+          </p>
+          <div class="text-base leading-relaxed text-stone-400 font-light reveal-on-scroll">
+            <p>{project.details}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="pb-20 lg:pb-28">
+    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {project.gallery.map((img, i) => (
+          <div
+            class:list={[
+              "overflow-hidden reveal-on-scroll",
+              i === 0 ? "md:col-span-2 aspect-[21/9]" : "aspect-[4/3]",
+            ]}
+            style={`transition-delay: ${i * 0.1}s`}
+          >
+            <img
+              src={img}
+              alt={`${project.title} - Image ${i + 1}`}
+              class="h-full w-full object-cover hover:scale-105 transition-transform duration-700"
+              loading="lazy"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Projects -->
+  {relatedProjects.length > 0 && (
+    <section class="py-20 lg:py-28 border-t border-stone-800/50">
+      <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
+        <h2 class="font-[Playfair_Display] text-2xl md:text-3xl font-normal text-white mb-12 reveal-on-scroll">
+          Related Projects
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+          {relatedProjects.map((rp, i) => (
+            <a
+              href={`/portfolio/${rp.slug}`}
+              class="group relative overflow-hidden aspect-[16/10] reveal-on-scroll"
+              style={`transition-delay: ${i * 0.1}s`}
+            >
+              <img
+                src={rp.thumbnail}
+                alt={rp.title}
+                class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500"></div>
+              <div class="absolute inset-0 flex flex-col justify-end p-6 lg:p-10">
+                <p class="text-[10px] font-medium uppercase tracking-[0.25em] text-accent mb-2">{rp.category}</p>
+                <h3 class="font-[Playfair_Display] text-xl lg:text-2xl font-normal text-white">{rp.title}</h3>
+                <p class="text-xs text-stone-400 mt-1">{rp.location}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</Layout>

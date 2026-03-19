@@ -1,0 +1,138 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { portfolioItems } from "../../data/portfolio";
+
+const commercial = portfolioItems.filter((p) => p.category === "commercial");
+const residential = portfolioItems.filter((p) => p.category === "residential");
+---
+
+<Layout title="Portfolio" description="Explore our portfolio of residential and commercial architecture projects.">
+  <!-- Page Header -->
+  <section class="pt-36 pb-20 lg:pt-44 lg:pb-28">
+    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div class="max-w-3xl">
+        <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-6 animate-fade-in">Our Work</p>
+        <h1 class="font-[Playfair_Display] text-5xl md:text-6xl lg:text-7xl font-medium leading-[0.95] text-white animate-fade-up">
+          Portfolio
+        </h1>
+        <p class="mt-6 text-base lg:text-lg leading-relaxed text-stone-400 font-light max-w-xl animate-fade-up" style="animation-delay: 0.2s">
+          A curated selection of residential and commercial projects that reflect
+          our commitment to design excellence and meticulous execution.
+        </p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="mt-12 flex gap-1 animate-fade-up" style="animation-delay: 0.4s">
+        <button
+          data-filter="all"
+          class="filter-btn active px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white bg-stone-800 transition-all duration-300"
+        >
+          All
+        </button>
+        <button
+          data-filter="residential"
+          class="filter-btn px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 hover:text-white transition-all duration-300"
+        >
+          Residential
+        </button>
+        <button
+          data-filter="commercial"
+          class="filter-btn px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 hover:text-white transition-all duration-300"
+        >
+          Commercial
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Grid -->
+  <section class="pb-28 lg:pb-40">
+    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+        {portfolioItems.map((project, i) => (
+          <a
+            href={`/portfolio/${project.slug}`}
+            class="portfolio-item group relative overflow-hidden aspect-[4/5]"
+            data-category={project.category}
+            style={`animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.08}s both`}
+          >
+            <img
+              src={project.thumbnail}
+              alt={project.title}
+              class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/10 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500"></div>
+
+            <div class="absolute inset-0 flex flex-col justify-end p-6 lg:p-8">
+              <div class="transform transition-all duration-500">
+                <p class="text-[10px] font-medium uppercase tracking-[0.25em] text-accent mb-2">
+                  {project.category}
+                </p>
+                <h3 class="font-[Playfair_Display] text-xl lg:text-2xl font-normal text-white leading-tight">
+                  {project.title}
+                </h3>
+                <p class="text-xs text-stone-400 mt-1.5">{project.location} &middot; {project.year}</p>
+
+                <div class="mt-3 overflow-hidden max-h-0 group-hover:max-h-24 transition-all duration-500">
+                  <p class="text-sm text-stone-400 leading-relaxed line-clamp-2">{project.description}</p>
+                </div>
+
+                <div class="mt-4 flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.15em] text-stone-400 group-hover:text-white transition-colors duration-300">
+                  <span>View Project</span>
+                  <svg class="w-3.5 h-3.5 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 lg:py-32 border-t border-stone-800/50">
+    <div class="mx-auto max-w-[1400px] px-6 lg:px-12 text-center">
+      <h2 class="font-[Playfair_Display] text-3xl md:text-4xl font-normal text-white reveal-on-scroll">
+        Have a project in mind?
+      </h2>
+      <p class="mt-4 text-stone-400 font-light reveal-on-scroll">
+        Let's discuss how we can bring your vision to reality.
+      </p>
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-3 mt-8 bg-white text-stone-950 px-10 py-4 text-[12px] font-semibold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-stone-200 reveal-on-scroll"
+      >
+        Start a Conversation
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
+  const items = document.querySelectorAll<HTMLElement>(".portfolio-item");
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      buttons.forEach((b) => {
+        b.classList.remove("active", "text-white", "bg-stone-800");
+        b.classList.add("text-stone-500");
+      });
+      btn.classList.add("active", "text-white", "bg-stone-800");
+      btn.classList.remove("text-stone-500");
+
+      const filter = btn.dataset.filter;
+
+      items.forEach((item, i) => {
+        if (filter === "all" || item.dataset.category === filter) {
+          item.style.display = "";
+          item.style.animation = `fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.06}s both`;
+        } else {
+          item.style.display = "none";
+        }
+      });
+    });
+  });
+</script>

@@ -1,0 +1,238 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="About" description="Learn about E.V Design Studio — our philosophy, process, and the team behind award-winning architectural design.">
+  <!-- Hero -->
+  <section class="pt-36 pb-20 lg:pt-44 lg:pb-28">
+    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-end">
+        <div class="lg:col-span-7">
+          <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-6 animate-fade-in">About Us</p>
+          <h1 class="font-[Playfair_Display] text-5xl md:text-6xl lg:text-7xl font-medium leading-[0.95] text-white animate-fade-up">
+            Our<br />
+            <span class="italic font-normal text-stone-300">Studio</span>
+          </h1>
+        </div>
+        <div class="lg:col-span-5 animate-fade-up" style="animation-delay: 0.3s">
+          <p class="text-base lg:text-lg leading-relaxed text-stone-400 font-light">
+            E.V Design Studio is a full-service architecture and design firm based
+            in Los Angeles, dedicated to delivering extraordinary results for clients
+            who expect nothing less.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full-width Image -->
+  <section class="pb-20 lg:pb-28">
+    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div class="aspect-[21/9] overflow-hidden animate-fade-up" style="animation-delay: 0.5s">
+        <img
+          src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&q=80"
+          alt="E.V Design Studio workspace"
+          class="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophy -->
+  <section class="py-20 lg:py-28">
+    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+        <div class="reveal-on-scroll">
+          <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-6">Our Philosophy</p>
+          <h2 class="font-[Playfair_Display] text-3xl md:text-4xl font-normal text-white leading-snug">
+            We anticipate challenges before they arise
+          </h2>
+        </div>
+        <div class="space-y-6 reveal-on-scroll" style="transition-delay: 0.15s">
+          <p class="text-base leading-relaxed text-stone-400 font-light">
+            Discerning homeowners and investors choose our firm because we deliver more
+            than plans — we deliver peace of mind. Our team blends architectural vision
+            with rigorous engineering and permitting expertise, ensuring every project is
+            executed with precision, sophistication, and full regulatory confidence.
+          </p>
+          <p class="text-base leading-relaxed text-stone-400 font-light">
+            We anticipate challenges before they arise, streamline communication with city
+            agencies, and protect your investment at every step. In a market where timing
+            and compliance are everything, acting now ensures you secure today's advantages
+            in cost, value, and entitlement.
+          </p>
+          <p class="text-base leading-relaxed text-stone-400 font-light">
+            Our diverse portfolio spans residential estates, commercial developments,
+            hospitality venues, and adaptive reuse projects across Southern California.
+            We don't specialize in a particular typology — we specialize in excellence.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="py-20 lg:py-28 border-t border-stone-800/50">
+    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div class="text-center mb-20 reveal-on-scroll">
+        <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-4">What Defines Us</p>
+        <h2 class="font-[Playfair_Display] text-3xl md:text-4xl lg:text-5xl font-normal text-white">
+          Our Values
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-stone-800/30">
+        {[
+          {
+            number: "01",
+            title: "Precision",
+            desc: "Every line drawn, every detail specified, every permit filed reflects our unwavering commitment to getting it right the first time. Precision isn't just a standard — it's the foundation of trust.",
+          },
+          {
+            number: "02",
+            title: "Vision",
+            desc: "We see beyond the obvious to discover design solutions that elevate the ordinary into the extraordinary. Our creative ambition is always grounded in practical feasibility and client priorities.",
+          },
+          {
+            number: "03",
+            title: "Integrity",
+            desc: "Transparent communication, honest timelines, and a commitment to protecting your investment define every client relationship. We treat your project as if it were our own.",
+          },
+        ].map((value, i) => (
+          <div
+            class="bg-stone-950 p-10 lg:p-14 reveal-on-scroll"
+            style={`transition-delay: ${i * 0.12}s`}
+          >
+            <span class="font-[Playfair_Display] text-5xl lg:text-6xl font-light text-stone-800">{value.number}</span>
+            <h3 class="mt-6 text-sm font-semibold uppercase tracking-[0.15em] text-white">{value.title}</h3>
+            <p class="mt-4 text-sm leading-relaxed text-stone-500">{value.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="py-20 lg:py-28">
+    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div class="max-w-xl mb-16 reveal-on-scroll">
+        <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-4">How We Work</p>
+        <h2 class="font-[Playfair_Display] text-3xl md:text-4xl lg:text-5xl font-normal text-white">
+          Our Process
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+        {[
+          {
+            step: "01",
+            title: "Discovery",
+            desc: "We begin with deep listening — understanding your goals, constraints, site conditions, and aspirations to establish a clear project vision.",
+          },
+          {
+            step: "02",
+            title: "Design",
+            desc: "Through iterative design development, we craft architectural solutions that balance aesthetic ambition with structural rigor and regulatory requirements.",
+          },
+          {
+            step: "03",
+            title: "Documentation",
+            desc: "Our comprehensive construction documents and permit sets are prepared with meticulous attention to detail, ensuring smooth approvals and accurate builds.",
+          },
+          {
+            step: "04",
+            title: "Delivery",
+            desc: "From permit submission through construction administration, we remain your advocate — coordinating with contractors, engineers, and agencies to protect your vision.",
+          },
+        ].map((item, i) => (
+          <div class="reveal-on-scroll group" style={`transition-delay: ${i * 0.1}s`}>
+            <div class="border-t border-stone-800 group-hover:border-accent transition-colors duration-500 pt-8">
+              <span class="text-[11px] font-medium uppercase tracking-[0.2em] text-accent">{item.step}</span>
+              <h3 class="mt-4 text-lg font-medium text-white">{item.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-stone-500">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Team / Principal -->
+  <section class="py-20 lg:py-28 border-t border-stone-800/50">
+    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+        <div class="lg:col-span-5 reveal-on-scroll">
+          <div class="aspect-[3/4] overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80"
+              alt="Studio Principal"
+              class="h-full w-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 flex flex-col justify-center reveal-on-scroll" style="transition-delay: 0.15s">
+          <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-6">Leadership</p>
+          <h2 class="font-[Playfair_Display] text-3xl md:text-4xl font-normal text-white">
+            Principal & Founder
+          </h2>
+          <p class="mt-8 text-base leading-relaxed text-stone-400 font-light">
+            With over a decade of experience in architecture, engineering coordination,
+            and regulatory navigation, our founder established E.V Design Studio with a
+            singular vision: to create a firm where design excellence and operational
+            precision are inseparable.
+          </p>
+          <p class="mt-4 text-base leading-relaxed text-stone-400 font-light">
+            Having worked on projects ranging from bespoke residences to large-scale
+            commercial developments, the firm brings a breadth of experience that allows
+            us to approach every project with both creative ambition and practical wisdom.
+            Our relationships with city planning departments, structural engineers, and
+            construction teams have been cultivated over years of successful collaboration.
+          </p>
+          <div class="mt-8 grid grid-cols-3 gap-8">
+            {[
+              { stat: "150+", label: "Projects" },
+              { stat: "12+", label: "Years" },
+              { stat: "100%", label: "Approvals" },
+            ].map((s) => (
+              <div>
+                <span class="font-[Playfair_Display] text-2xl text-white">{s.stat}</span>
+                <p class="mt-1 text-[10px] font-medium uppercase tracking-[0.2em] text-stone-500">{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="relative py-32 lg:py-44 overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&q=80"
+        alt="Architecture interior"
+        class="h-full w-full object-cover"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-stone-950/80"></div>
+    </div>
+
+    <div class="relative z-10 mx-auto max-w-[1400px] px-6 lg:px-12 text-center">
+      <div class="max-w-2xl mx-auto reveal-on-scroll">
+        <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-6">Work With Us</p>
+        <h2 class="font-[Playfair_Display] text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-snug">
+          Let's create something extraordinary together
+        </h2>
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-3 mt-10 bg-white text-stone-950 px-10 py-4 text-[12px] font-semibold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-stone-200"
+        >
+          Free Consultation
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
