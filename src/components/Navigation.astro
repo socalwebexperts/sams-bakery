@@ -11,14 +11,9 @@ const navLinks = [
 
 <header id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
   <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
-    <div class="flex items-center justify-between py-6">
-      <a href="/" class="group relative z-50">
-        <span class="font-[Playfair_Display] text-2xl font-semibold tracking-wide text-white">
-          E.V
-        </span>
-        <span class="ml-1 text-[10px] font-light uppercase tracking-[0.3em] text-stone-400 group-hover:text-white transition-colors duration-300">
-          Design Studio
-        </span>
+    <div class="flex items-center justify-between py-2">
+      <a href="/" class="relative z-50">
+        <img src="https://res.cloudinary.com/ds85pv6ht/image/upload/v1773983715/IMG_6436_huwok5.png" alt="E.V Design Studio" class="h-16 lg:h-20 w-auto" />
       </a>
 
       <nav class="hidden lg:flex items-center gap-10">
@@ -29,7 +24,7 @@ const navLinks = [
               "relative text-[13px] font-medium uppercase tracking-[0.15em] transition-colors duration-300",
               currentPath === href || (href !== "/" && currentPath.startsWith(href))
                 ? "text-white"
-                : "text-stone-400 hover:text-white",
+                : "text-stone-200 hover:text-white",
             ]}
           >
             {label}
@@ -42,7 +37,7 @@ const navLinks = [
 
       <a
         href="/contact"
-        class="hidden lg:inline-flex items-center gap-2 border border-stone-700 px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.2em] text-stone-300 transition-all duration-300 hover:border-white hover:text-white hover:bg-white/5"
+        class="hidden lg:inline-flex items-center gap-2 border border-stone-500 px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.2em] text-stone-200 transition-all duration-300 hover:border-white hover:text-white hover:bg-white/5"
       >
         Get in Touch
       </a>

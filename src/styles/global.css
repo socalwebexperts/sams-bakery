@@ -17,9 +17,13 @@
   --color-stone-100: #f5f5f4;
   --color-stone-50: #fafaf9;
 
-  --color-accent: #8b7355;
-  --color-accent-light: #b09a7a;
-  --color-accent-dark: #6b5740;
+  --color-accent: #a8946b;
+  --color-accent-light: #c4b08d;
+  --color-accent-dark: #8a7753;
+
+  --color-deep: #183138;
+  --color-deep-light: #1f3d46;
+  --color-deep-dark: #11242a;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
