@@ -1,0 +1,28 @@
+Cloudflare Pages — Git-connected project (evdesignstudio)
+========================================================
+
+Wrangler cannot attach GitHub to a project. Create this in the dashboard:
+
+1. Open: https://dash.cloudflare.com/ → Workers & Pages
+2. Create application → Pages → Connect to Git (not “Direct Upload”).
+3. Authorize GitHub and select repository: socalwebexperts/evdesignstudio
+4. Configure build:
+   - Project name: evdesignstudio
+   - Production branch: main
+   - Framework preset: Astro (or custom below)
+   - Build command: pnpm run build
+   - Build output directory: dist
+   - Root directory: / (leave default unless this app lives in a subfolder)
+
+5. Optional environment variables (Settings → Environment variables → Production):
+   - PNPM_VERSION = 10.16.1   (matches package.json packageManager; optional if default pnpm works)
+   Node version is read from .nvmrc in the repo root.
+
+6. Save and Deploy.
+
+Notes:
+- Do not run "wrangler pages project create" first for a Git-only workflow; use Connect to Git to create the project.
+- After Git is connected, pushes to main trigger production builds.
+- wrangler.jsonc in this repo is for local tooling / optional manual "wrangler pages deploy" if you ever disable auto-deploy.
+
+Repository remote: git@github.com:socalwebexperts/evdesignstudio.git
