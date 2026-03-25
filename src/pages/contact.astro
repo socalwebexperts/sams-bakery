@@ -84,58 +84,46 @@ import Layout from "../layouts/Layout.astro";
               Tell us about your project and we'll get back to you within 24 hours.
             </p>
 
-            <form id="contact-form" class="space-y-6">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label for="firstName" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
-                    First Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    required
-                    class="w-full bg-transparent border-b border-stone-700 pb-3 text-base text-white placeholder-stone-600 focus:border-accent focus:outline-none transition-colors duration-300"
-                    placeholder="John"
-                  />
-                </div>
-                <div>
-                  <label for="lastName" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
-                    Last Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    required
-                    class="w-full bg-transparent border-b border-stone-700 pb-3 text-base text-white placeholder-stone-600 focus:border-accent focus:outline-none transition-colors duration-300"
-                    placeholder="Doe"
-                  />
-                </div>
+            <form id="ct-contact-form" class="space-y-6">
+              <div>
+                <label for="ct-name" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
+                  Name *
+                </label>
+                <input
+                  type="text"
+                  id="ct-name"
+                  name="name"
+                  required
+                  autocomplete="name"
+                  class="w-full bg-transparent border-b border-stone-700 pb-3 text-base text-white placeholder-stone-600 focus:border-accent focus:outline-none transition-colors duration-300"
+                  placeholder="Your full name"
+                />
               </div>
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label for="email" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
+                  <label for="ct-email" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
                     Email *
                   </label>
                   <input
                     type="email"
-                    id="email"
+                    id="ct-email"
                     name="email"
                     required
+                    autocomplete="email"
                     class="w-full bg-transparent border-b border-stone-700 pb-3 text-base text-white placeholder-stone-600 focus:border-accent focus:outline-none transition-colors duration-300"
                     placeholder="john@example.com"
                   />
                 </div>
                 <div>
-                  <label for="phone" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
+                  <label for="ct-phone" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
                     Phone
                   </label>
                   <input
                     type="tel"
-                    id="phone"
+                    id="ct-phone"
                     name="phone"
+                    autocomplete="tel"
                     class="w-full bg-transparent border-b border-stone-700 pb-3 text-base text-white placeholder-stone-600 focus:border-accent focus:outline-none transition-colors duration-300"
                     placeholder="+1 (234) 567-890"
                   />
@@ -143,30 +131,54 @@ import Layout from "../layouts/Layout.astro";
               </div>
 
               <div>
-                <label for="projectType" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
-                  Project Type *
+                <label for="ct-address" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
+                  Project Address
                 </label>
-                <select
-                  id="projectType"
-                  name="projectType"
-                  required
-                  class="w-full bg-transparent border-b border-stone-700 pb-3 text-base text-white focus:border-accent focus:outline-none transition-colors duration-300 appearance-none cursor-pointer"
-                >
-                  <option value="" class="bg-stone-900">Select a project type</option>
-                  <option value="residential" class="bg-stone-900">Residential</option>
-                  <option value="commercial" class="bg-stone-900">Commercial</option>
-                  <option value="permitting" class="bg-stone-900">Permitting Only</option>
-                  <option value="consulting" class="bg-stone-900">Consulting</option>
-                  <option value="other" class="bg-stone-900">Other</option>
-                </select>
+                <input
+                  type="text"
+                  id="ct-address"
+                  name="address"
+                  autocomplete="street-address"
+                  class="w-full bg-transparent border-b border-stone-700 pb-3 text-base text-white placeholder-stone-600 focus:border-accent focus:outline-none transition-colors duration-300"
+                  placeholder="123 Main St, Los Angeles, CA"
+                />
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
+                <div>
+                  <label for="ct-projectType" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
+                    Project Type
+                  </label>
+                  <select
+                    id="ct-projectType"
+                    name="projectType"
+                    class="w-full bg-transparent border-b border-stone-700 pb-3 text-base text-white focus:border-accent focus:outline-none transition-colors duration-300 appearance-none cursor-pointer"
+                  >
+                    <option value="" class="bg-stone-900">Select type</option>
+                    <option value="residential" class="bg-stone-900">Residential</option>
+                    <option value="commercial" class="bg-stone-900">Commercial</option>
+                  </select>
+                </div>
+                <div id="ct-subcategory-wrap" class="transition-all duration-300 ease-out opacity-0 max-h-0 overflow-hidden pointer-events-none">
+                  <label for="ct-subcategory" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
+                    Scope
+                  </label>
+                  <select
+                    id="ct-subcategory"
+                    name="subcategory"
+                    class="w-full bg-transparent border-b border-stone-700 pb-3 text-base text-white focus:border-accent focus:outline-none transition-colors duration-300 appearance-none cursor-pointer"
+                  >
+                    <option value="" class="bg-stone-900">Select scope</option>
+                  </select>
+                </div>
               </div>
 
               <div>
-                <label for="message" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
+                <label for="ct-message" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
                   Tell Us About Your Project *
                 </label>
                 <textarea
-                  id="message"
+                  id="ct-message"
                   name="message"
                   required
                   rows="5"
@@ -178,15 +190,15 @@ import Layout from "../layouts/Layout.astro";
               <div class="pt-4">
                 <button
                   type="submit"
-                  class="inline-flex items-center gap-3 bg-white text-stone-950 px-10 py-4 text-[12px] font-semibold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-stone-200 w-full md:w-auto justify-center"
+                  class="group inline-flex items-center gap-3 bg-white text-stone-950 px-10 py-4 text-[12px] font-semibold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-stone-200 w-full md:w-auto justify-center"
                 >
                   Send Message
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                  <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                 </button>
               </div>
             </form>
 
-            <div id="form-success" class="hidden py-12 text-center">
+            <div id="ct-form-success" class="hidden py-12 text-center">
               <div class="inline-flex items-center justify-center w-16 h-16 rounded-full border border-accent/30 mb-6">
                 <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" /></svg>
               </div>
@@ -201,12 +213,57 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <script>
-  const form = document.getElementById("contact-form") as HTMLFormElement;
-  const success = document.getElementById("form-success")!;
+  function setupFormLogic(prefix: string) {
+    const form = document.getElementById(`${prefix}-contact-form`) as HTMLFormElement;
+    const success = document.getElementById(`${prefix}-form-success`)!;
+    const typeSelect = document.getElementById(`${prefix}-projectType`) as HTMLSelectElement;
+    const subWrap = document.getElementById(`${prefix}-subcategory-wrap`)!;
+    const subSelect = document.getElementById(`${prefix}-subcategory`) as HTMLSelectElement;
 
-  form?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    form.style.display = "none";
-    success.classList.remove("hidden");
-  });
+    const residentialOpts = [
+      { value: "", label: "Select scope" },
+      { value: "addition", label: "Addition" },
+      { value: "adu", label: "ADU" },
+      { value: "remodel", label: "Remodel" },
+    ];
+    const commercialOpts = [
+      { value: "", label: "Select scope" },
+      { value: "addition", label: "Addition" },
+      { value: "remodel", label: "Remodel" },
+    ];
+
+    function showSub(opts: { value: string; label: string }[]) {
+      subSelect.innerHTML = "";
+      opts.forEach((o) => {
+        const el = document.createElement("option");
+        el.value = o.value;
+        el.textContent = o.label;
+        el.className = "bg-stone-900";
+        subSelect.appendChild(el);
+      });
+      subWrap.classList.remove("opacity-0", "max-h-0", "pointer-events-none");
+      subWrap.classList.add("opacity-100", "max-h-24");
+    }
+
+    function hideSub() {
+      subWrap.classList.add("opacity-0", "max-h-0", "pointer-events-none");
+      subWrap.classList.remove("opacity-100", "max-h-24");
+      subSelect.value = "";
+    }
+
+    typeSelect?.addEventListener("change", () => {
+      const v = typeSelect.value;
+      if (v === "residential") showSub(residentialOpts);
+      else if (v === "commercial") showSub(commercialOpts);
+      else hideSub();
+    });
+
+    form?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      form.style.display = "none";
+      success.classList.remove("hidden");
+    });
+  }
+
+  setupFormLogic("ct");
 </script>
