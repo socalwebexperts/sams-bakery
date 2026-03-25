@@ -3,6 +3,63 @@ import Layout from "../layouts/Layout.astro";
 import { portfolioItems } from "../data/portfolio";
 
 const featuredProjects = portfolioItems.slice(0, 4);
+
+const processSteps = [
+  {
+    title: "Project Initiation",
+    pos: "bottom",
+    color: "#9ee4c5",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5.002 5.002 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />`,
+  },
+  {
+    title: "Phase 1: Design Review Meeting",
+    pos: "top",
+    color: "#4cb89a",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />`,
+  },
+  {
+    title: "Phase 2: Project's 1st Submittal",
+    pos: "bottom",
+    color: "#3a9a7a",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />`,
+  },
+  {
+    title: "City Comments / Clearances",
+    pos: "top",
+    color: "#2f8a8a",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />`,
+  },
+  {
+    title: "Department Approvals",
+    pos: "bottom",
+    color: "#2a7a9e",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />`,
+  },
+  {
+    title: "Phase 3: Project Approval",
+    pos: "top",
+    color: "#5eb0d4",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />`,
+  },
+  {
+    title: "Pull Permits & Construct",
+    pos: "bottom",
+    color: "#3d7eb8",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75a4.5 4.5 0 01-4.884 4.484c-1.076-.091-2.264.071-2.95.904l-7.152 8.684a2.548 2.548 0 11-3.586-3.586l8.684-7.152c.833-.686.995-1.874.904-2.95a4.5 4.5 0 016.336-4.486l-3.276 3.276a3.004 3.004 0 002.25 2.25l3.276-3.276c.256.565.398 1.192.398 1.852z" />`,
+  },
+  {
+    title: "Certificate of Occupancy",
+    pos: "top",
+    color: "#2d5a8a",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />`,
+  },
+  {
+    title: "Increase Value",
+    pos: "bottom",
+    color: "#3d3a6b",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />`,
+  },
+];
 ---
 
 <Layout title="Home">
@@ -79,6 +136,83 @@ const featuredProjects = portfolioItems.slice(0, 4);
           Learn More
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Process -->
+  <section class="py-20 lg:py-28 bg-stone-950">
+    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div class="text-center mb-12 lg:mb-10 max-w-3xl mx-auto reveal-on-scroll">
+        <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-4">How We Work</p>
+        <h2 class="font-[Playfair_Display] text-3xl md:text-4xl lg:text-5xl font-normal text-white">
+          Our Process
+        </h2>
+        <p class="mt-5 text-sm md:text-base leading-relaxed text-stone-400 font-light">
+          From initial concept through city review, approvals, construction, and certificate of occupancy — a transparent roadmap so you always know what comes next.
+        </p>
+      </div>
+
+      <!-- Desktop Process Arrow (lg+) -->
+      <div class="hidden lg:block reveal-on-scroll">
+        <div class="relative" style="padding-top: 9rem; padding-bottom: 9rem;">
+          <div class="flex">
+            {processSteps.map((step, i) => (
+              <div
+                class="relative"
+                style={`flex:1;height:72px;${i > 0 ? 'margin-left:-18px;' : ''}z-index:${processSteps.length - i};`}
+              >
+                <div
+                  class="absolute inset-0 flex items-center justify-center"
+                  style={`background:${step.color};clip-path:${i === 0 ? 'polygon(0 0,calc(100% - 18px) 0,100% 50%,calc(100% - 18px) 100%,0 100%)' : 'polygon(0 0,calc(100% - 18px) 0,100% 50%,calc(100% - 18px) 100%,0 100%,18px 50%)'};`}
+                >
+                  <svg class="w-7 h-7 text-white shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" set:html={step.icon} />
+                </div>
+
+                {step.pos === "top" ? (
+                  <div class="absolute bottom-full left-1/2 -translate-x-1/2 flex flex-col items-center w-[min(100%,12rem)]">
+                    <p class="text-[11px] font-bold uppercase tracking-[0.1em] text-stone-200 text-center leading-tight mb-1.5">
+                      {step.title}
+                    </p>
+                    <svg class="w-[14px] h-[40px] text-stone-300 shrink-0" viewBox="0 0 14 40" fill="currentColor" aria-hidden="true">
+                      <path d="M7 0L14 10H9V40H5V10H0z" />
+                    </svg>
+                  </div>
+                ) : (
+                  <div class="absolute top-full left-1/2 -translate-x-1/2 flex flex-col items-center w-[min(100%,12rem)]">
+                    <svg class="w-[14px] h-[40px] text-stone-300 shrink-0" viewBox="0 0 14 40" fill="currentColor" aria-hidden="true">
+                      <path d="M5 0H9V30H14L7 40L0 30H5z" />
+                    </svg>
+                    <p class="text-[11px] font-bold uppercase tracking-[0.1em] text-stone-200 text-center leading-tight mt-1.5">
+                      {step.title}
+                    </p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile / Tablet Process (below lg) -->
+      <div class="lg:hidden reveal-on-scroll">
+        <div class="max-w-md mx-auto">
+          {processSteps.map((step, i) => (
+            <div class="flex items-start gap-4">
+              <div class="flex flex-col items-center shrink-0">
+                <div class="w-11 h-11 rounded-full flex items-center justify-center" style={`background:${step.color}`}>
+                  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" set:html={step.icon} />
+                </div>
+                {i < processSteps.length - 1 && (
+                  <div class="w-0.5 h-8" style={`background:linear-gradient(to bottom,${step.color},${processSteps[i + 1].color})`}></div>
+                )}
+              </div>
+              <div class="pt-2.5 pb-4">
+                <p class="text-xs font-semibold uppercase tracking-[0.12em] text-stone-300">{step.title}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
