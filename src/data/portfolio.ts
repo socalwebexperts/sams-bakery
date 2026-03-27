@@ -1,7 +1,11 @@
+export type PortfolioGroup = "residential" | "land-surveying" | "adu" | "commercial";
+
 export interface PortfolioItem {
   slug: string;
   title: string;
   category: "commercial" | "residential";
+  /** Display section on the portfolio index (matches home page categories). */
+  portfolioGroup: PortfolioGroup;
   location: string;
   year: string;
   status: "Completed" | "In Progress";
@@ -20,6 +24,7 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "glendale-mills-avenue",
     title: "3309 Mills Ave, Glendale",
     category: "residential",
+    portfolioGroup: "residential",
     location: "Glendale, CA",
     year: "2022–2024",
     status: "Completed",
@@ -52,6 +57,7 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "tujunga-irma-adu",
     title: "11015 Irma Ave, Tujunga — ADU",
     category: "residential",
+    portfolioGroup: "adu",
     location: "Tujunga, CA",
     year: "2023",
     status: "Completed",
@@ -68,6 +74,7 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "educational-facility-planning",
     title: "Educational facility planning",
     category: "commercial",
+    portfolioGroup: "commercial",
     location: "Los Angeles, CA",
     year: "2022–2025",
     status: "Completed",
@@ -115,6 +122,7 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "form-finding-site-study",
     title: "Form finding & site study",
     category: "commercial",
+    portfolioGroup: "land-surveying",
     location: "Los Angeles, CA",
     year: "2022–2025",
     status: "Completed",
@@ -165,6 +173,7 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "environmental-biomimicry-study",
     title: "Environmental & biomimicry study",
     category: "commercial",
+    portfolioGroup: "commercial",
     location: "Los Angeles, CA",
     year: "2022–2025",
     status: "Completed",
@@ -214,6 +223,7 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "otis-campus-planning",
     title: "Campus planning & context",
     category: "commercial",
+    portfolioGroup: "commercial",
     location: "Los Angeles, CA",
     year: "2022–2025",
     status: "Completed",
@@ -242,6 +252,7 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "daylight-occupancy-study",
     title: "Daylight & occupancy study",
     category: "commercial",
+    portfolioGroup: "commercial",
     location: "Los Angeles, CA",
     year: "2022–2025",
     status: "Completed",
@@ -274,6 +285,7 @@ export const portfolioItems: PortfolioItem[] = [
     slug: "portfolio-presentation-plates",
     title: "Studio portfolio & identity",
     category: "commercial",
+    portfolioGroup: "commercial",
     location: "Studio",
     year: "2022–2025",
     status: "Completed",

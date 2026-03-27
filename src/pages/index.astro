@@ -2,7 +2,24 @@
 import Layout from "../layouts/Layout.astro";
 import { portfolioItems } from "../data/portfolio";
 
-const featuredProjects = portfolioItems.slice(0, 4);
+const portfolioTileSlugs = [
+  "glendale-mills-avenue",
+  "form-finding-site-study",
+  "tujunga-irma-adu",
+  "educational-facility-planning",
+] as const;
+
+const portfolioTiles = (
+  [
+    "Residential Remodeling Projects",
+    "Land Surveying Projects",
+    "ADU Projects",
+    "Commercial Projects",
+  ] as const
+).map((label, i) => {
+  const project = portfolioItems.find((p) => p.slug === portfolioTileSlugs[i])!;
+  return { ...project, label };
+});
 
 const processSteps = [
   {
@@ -79,7 +96,7 @@ const processSteps = [
     <div class="relative z-10 mx-auto max-w-[1400px] w-full px-6 lg:px-12 pb-10 lg:pb-12">
       <div class="max-w-3xl">
         <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-stone-300 mb-6 animate-fade-in" style="animation-delay: 0.3s">
-          Architecture &middot; Plans &middot; Permitting &middot; Consulting
+          Consulting &middot; Architectural Plans &middot; Engineering Plans &middot; Permitting
         </p>
         <h1 class="font-[Playfair_Display] text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-medium leading-[0.95] text-white animate-fade-up" style="animation-delay: 0.5s">
           Designing<br />
@@ -115,8 +132,85 @@ const processSteps = [
     </div>
   </section>
 
+  <!-- Our Process -->
+  <section class="py-24 lg:py-32 bg-stone-950">
+    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
+      <div class="text-center mb-12 lg:mb-10 max-w-3xl mx-auto reveal-on-scroll">
+        <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-4">How We Work</p>
+        <h2 class="font-[Playfair_Display] text-3xl md:text-4xl lg:text-5xl font-normal text-white">
+          Our Process
+        </h2>
+        <p class="mt-5 text-sm md:text-base leading-relaxed text-stone-400 font-light">
+          From initial concept through city review, approvals, construction, and certificate of occupancy — a transparent roadmap so you always know what comes next.
+        </p>
+      </div>
+
+      <!-- Desktop Process Arrow (lg+) -->
+      <div class="hidden lg:block reveal-on-scroll">
+        <div class="relative" style="padding-top: 9rem; padding-bottom: 9rem;">
+          <div class="flex">
+            {processSteps.map((step, i) => (
+              <div
+                class="relative"
+                style={`flex:1;height:72px;${i > 0 ? 'margin-left:-18px;' : ''}z-index:${processSteps.length - i};`}
+              >
+                <div
+                  class="absolute inset-0 flex items-center justify-center"
+                  style={`background:${step.color};clip-path:${i === 0 ? 'polygon(0 0,calc(100% - 18px) 0,100% 50%,calc(100% - 18px) 100%,0 100%)' : 'polygon(0 0,calc(100% - 18px) 0,100% 50%,calc(100% - 18px) 100%,0 100%,18px 50%)'};`}
+                >
+                  <svg class="w-7 h-7 text-white shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" set:html={step.icon} />
+                </div>
+
+                {step.pos === "top" ? (
+                  <div class="absolute bottom-full left-1/2 -translate-x-1/2 flex flex-col items-center w-[min(100%,12rem)]">
+                    <p class="text-[11px] font-bold uppercase tracking-[0.1em] text-stone-200 text-center leading-tight mb-1.5">
+                      {step.title}
+                    </p>
+                    <svg class="w-[14px] h-[40px] text-stone-300 shrink-0" viewBox="0 0 14 40" fill="currentColor" aria-hidden="true">
+                      <path d="M7 0L14 10H9V40H5V10H0z" />
+                    </svg>
+                  </div>
+                ) : (
+                  <div class="absolute top-full left-1/2 -translate-x-1/2 flex flex-col items-center w-[min(100%,12rem)]">
+                    <svg class="w-[14px] h-[40px] text-stone-300 shrink-0" viewBox="0 0 14 40" fill="currentColor" aria-hidden="true">
+                      <path d="M5 0H9V30H14L7 40L0 30H5z" />
+                    </svg>
+                    <p class="text-[11px] font-bold uppercase tracking-[0.1em] text-stone-200 text-center leading-tight mt-1.5">
+                      {step.title}
+                    </p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile / Tablet Process (below lg) -->
+      <div class="lg:hidden reveal-on-scroll">
+        <div class="max-w-md mx-auto">
+          {processSteps.map((step, i) => (
+            <div class="flex items-start gap-4">
+              <div class="flex flex-col items-center shrink-0">
+                <div class="w-11 h-11 rounded-full flex items-center justify-center" style={`background:${step.color}`}>
+                  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" set:html={step.icon} />
+                </div>
+                {i < processSteps.length - 1 && (
+                  <div class="w-0.5 h-8" style={`background:linear-gradient(to bottom,${step.color},${processSteps[i + 1].color})`}></div>
+                )}
+              </div>
+              <div class="pt-2.5 pb-4">
+                <p class="text-xs font-semibold uppercase tracking-[0.12em] text-stone-300">{step.title}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- About & Contact -->
-  <section class="py-28 lg:py-36">
+  <section class="py-24 lg:py-32">
     <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
@@ -263,6 +357,19 @@ const processSteps = [
                 ></textarea>
               </div>
 
+              <div class="flex items-start gap-3 pt-1">
+                <input
+                  type="checkbox"
+                  id="home-constructionEstimate"
+                  name="constructionEstimate"
+                  value="yes"
+                  class="mt-1 h-4 w-4 shrink-0 rounded border-stone-600 bg-stone-950/50 text-accent focus:ring-2 focus:ring-accent/40 focus:ring-offset-0 focus:ring-offset-transparent accent-accent"
+                />
+                <label for="home-constructionEstimate" class="text-sm text-stone-400 leading-snug cursor-pointer">
+                  Get a complete construction estimate?
+                </label>
+              </div>
+
               <div class="pt-2">
                 <button
                   type="submit"
@@ -289,7 +396,7 @@ const processSteps = [
   </section>
 
   <!-- Services -->
-  <section class="py-20 lg:py-28 border-t border-stone-800/50">
+  <section class="py-24 lg:py-32">
     <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
       <div class="text-center mb-20 reveal-on-scroll">
         <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-4">What We Do</p>
@@ -346,7 +453,7 @@ const processSteps = [
   </section>
 
   <!-- Featured Projects -->
-  <section class="py-20 lg:py-28">
+  <section class="py-24 lg:py-32">
     <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
       <div class="flex items-end justify-between mb-16 reveal-on-scroll">
         <div>
@@ -364,39 +471,44 @@ const processSteps = [
         </a>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-        {featuredProjects.map((project, i) => (
-          <a
-            href={`/portfolio/${project.slug}`}
-            class:list={[
-              "group relative overflow-hidden reveal-on-scroll",
-              i === 0 ? "md:col-span-2 aspect-[21/9]" : "aspect-[4/3]",
-            ]}
-            style={`transition-delay: ${i * 0.1}s`}
-          >
-            <img
-              src={project.thumbnail}
-              alt={project.title}
-              class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-              loading="lazy"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500"></div>
-            <div class="absolute inset-0 flex flex-col justify-end p-6 lg:p-10">
-              <div class="transform transition-transform duration-500 group-hover:translate-y-0 translate-y-2">
-                <p class="text-[10px] font-medium uppercase tracking-[0.25em] text-stone-400 mb-2">
-                  {project.category} &middot; {project.status}
-                </p>
-                <h3 class="font-[Playfair_Display] text-xl lg:text-2xl font-normal text-white">
-                  {project.title}
-                </h3>
-                <p class="text-sm text-stone-400 mt-1">{project.location}</p>
-                <div class="mt-4 flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.15em] text-stone-400 group-hover:text-white transition-colors duration-300">
-                  <span>View Project</span>
-                  <svg class="w-3.5 h-3.5 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+      <div class="grid grid-cols-2 gap-x-4 gap-y-8 lg:gap-x-6 lg:gap-y-10">
+        {portfolioTiles.map((project, i) => (
+          <div class="flex flex-col">
+            <h3
+              class="font-[Playfair_Display] text-lg md:text-xl lg:text-2xl font-normal text-stone-500/65 mb-3 lg:mb-4 tracking-tight reveal-on-scroll"
+              style={`transition-delay: ${i * 0.1}s`}
+            >
+              {project.label}
+            </h3>
+            <a
+              href={`/portfolio/${project.slug}`}
+              class="group relative aspect-square overflow-hidden reveal-on-scroll"
+              style={`transition-delay: ${i * 0.1}s`}
+            >
+              <img
+                src={project.thumbnail}
+                alt={project.title}
+                class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500"></div>
+              <div class="absolute inset-0 flex flex-col justify-end p-6 lg:p-10">
+                <div class="transform transition-transform duration-500 group-hover:translate-y-0 translate-y-2">
+                  <p class="text-[10px] font-medium uppercase tracking-[0.25em] text-stone-400 mb-2">
+                    {project.category} &middot; {project.status}
+                  </p>
+                  <p class="font-[Playfair_Display] text-xl lg:text-2xl font-normal text-white leading-snug">
+                    {project.title}
+                  </p>
+                  <p class="text-sm text-stone-400 mt-1">{project.location}</p>
+                  <div class="mt-4 flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.15em] text-stone-400 group-hover:text-white transition-colors duration-300">
+                    <span>View Project</span>
+                    <svg class="w-3.5 h-3.5 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                  </div>
                 </div>
               </div>
-            </div>
-          </a>
+            </a>
+          </div>
         ))}
       </div>
 
@@ -412,85 +524,8 @@ const processSteps = [
     </div>
   </section>
 
-  <!-- Our Process -->
-  <section class="py-20 lg:py-28 bg-stone-950">
-    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
-      <div class="text-center mb-12 lg:mb-10 max-w-3xl mx-auto reveal-on-scroll">
-        <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-4">How We Work</p>
-        <h2 class="font-[Playfair_Display] text-3xl md:text-4xl lg:text-5xl font-normal text-white">
-          Our Process
-        </h2>
-        <p class="mt-5 text-sm md:text-base leading-relaxed text-stone-400 font-light">
-          From initial concept through city review, approvals, construction, and certificate of occupancy — a transparent roadmap so you always know what comes next.
-        </p>
-      </div>
-
-      <!-- Desktop Process Arrow (lg+) -->
-      <div class="hidden lg:block reveal-on-scroll">
-        <div class="relative" style="padding-top: 9rem; padding-bottom: 9rem;">
-          <div class="flex">
-            {processSteps.map((step, i) => (
-              <div
-                class="relative"
-                style={`flex:1;height:72px;${i > 0 ? 'margin-left:-18px;' : ''}z-index:${processSteps.length - i};`}
-              >
-                <div
-                  class="absolute inset-0 flex items-center justify-center"
-                  style={`background:${step.color};clip-path:${i === 0 ? 'polygon(0 0,calc(100% - 18px) 0,100% 50%,calc(100% - 18px) 100%,0 100%)' : 'polygon(0 0,calc(100% - 18px) 0,100% 50%,calc(100% - 18px) 100%,0 100%,18px 50%)'};`}
-                >
-                  <svg class="w-7 h-7 text-white shrink-0" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" set:html={step.icon} />
-                </div>
-
-                {step.pos === "top" ? (
-                  <div class="absolute bottom-full left-1/2 -translate-x-1/2 flex flex-col items-center w-[min(100%,12rem)]">
-                    <p class="text-[11px] font-bold uppercase tracking-[0.1em] text-stone-200 text-center leading-tight mb-1.5">
-                      {step.title}
-                    </p>
-                    <svg class="w-[14px] h-[40px] text-stone-300 shrink-0" viewBox="0 0 14 40" fill="currentColor" aria-hidden="true">
-                      <path d="M7 0L14 10H9V40H5V10H0z" />
-                    </svg>
-                  </div>
-                ) : (
-                  <div class="absolute top-full left-1/2 -translate-x-1/2 flex flex-col items-center w-[min(100%,12rem)]">
-                    <svg class="w-[14px] h-[40px] text-stone-300 shrink-0" viewBox="0 0 14 40" fill="currentColor" aria-hidden="true">
-                      <path d="M5 0H9V30H14L7 40L0 30H5z" />
-                    </svg>
-                    <p class="text-[11px] font-bold uppercase tracking-[0.1em] text-stone-200 text-center leading-tight mt-1.5">
-                      {step.title}
-                    </p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <!-- Mobile / Tablet Process (below lg) -->
-      <div class="lg:hidden reveal-on-scroll">
-        <div class="max-w-md mx-auto">
-          {processSteps.map((step, i) => (
-            <div class="flex items-start gap-4">
-              <div class="flex flex-col items-center shrink-0">
-                <div class="w-11 h-11 rounded-full flex items-center justify-center" style={`background:${step.color}`}>
-                  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" set:html={step.icon} />
-                </div>
-                {i < processSteps.length - 1 && (
-                  <div class="w-0.5 h-8" style={`background:linear-gradient(to bottom,${step.color},${processSteps[i + 1].color})`}></div>
-                )}
-              </div>
-              <div class="pt-2.5 pb-4">
-                <p class="text-xs font-semibold uppercase tracking-[0.12em] text-stone-300">{step.title}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Stats -->
-  <section class="py-20 lg:py-28 bg-deep-dark">
+  <section class="py-24 lg:py-32 bg-deep-dark">
     <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 reveal-on-scroll">
         {[
@@ -509,7 +544,7 @@ const processSteps = [
   </section>
 
   <!-- CTA Section -->
-  <section class="relative py-32 lg:py-44 overflow-hidden">
+  <section class="relative py-24 lg:py-32 overflow-hidden">
     <div class="absolute inset-0">
       <img
         src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80"

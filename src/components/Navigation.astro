@@ -12,8 +12,11 @@ const navLinks = [
 <header id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
   <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
     <div class="flex items-center justify-between py-2">
-      <a href="/" class="relative z-50">
-        <img src="https://res.cloudinary.com/ds85pv6ht/image/upload/v1773983715/IMG_6436_huwok5.png" alt="E.V Design Studio" class="h-16 lg:h-20 w-auto" />
+      <a href="/" class="relative z-50 flex flex-col items-start gap-1 lg:gap-1.5">
+        <img src="https://res.cloudinary.com/ds85pv6ht/image/upload/v1773983715/IMG_6436_huwok5.png" alt="E.V Design Studio" class="h-20 lg:h-28 w-auto" />
+        <span class="text-[9px] lg:text-[10px] font-medium uppercase tracking-[0.22em] text-accent leading-tight">
+          From Dirt to Keys
+        </span>
       </a>
 
       <nav class="hidden lg:flex items-center gap-10">
@@ -86,10 +89,10 @@ const navLinks = [
 
   window.addEventListener("scroll", () => {
     if (window.scrollY > 80) {
-      nav.classList.add("bg-stone-950/90", "backdrop-blur-md", "py-0");
+      nav.classList.add("bg-deep-dark/90", "backdrop-blur-md", "py-0");
       nav.classList.remove("py-2");
     } else {
-      nav.classList.remove("bg-stone-950/90", "backdrop-blur-md", "py-0");
+      nav.classList.remove("bg-deep-dark/90", "backdrop-blur-md", "py-0");
       nav.classList.add("py-2");
     }
   });

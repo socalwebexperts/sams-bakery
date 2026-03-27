@@ -9,8 +9,8 @@ import Layout from "../layouts/Layout.astro";
       <div class="max-w-3xl">
         <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-6 animate-fade-in">Get in Touch</p>
         <h1 class="font-[Playfair_Display] text-5xl md:text-6xl lg:text-7xl font-medium leading-[0.95] text-white animate-fade-up">
-          Contact<br />
-          <span class="italic font-normal text-stone-300">Us</span>
+          Contact Your<br />
+          <span class="italic font-normal text-stone-300">Specialist</span>
         </h1>
         <p class="mt-6 text-base lg:text-lg leading-relaxed text-stone-400 font-light max-w-xl animate-fade-up" style="animation-delay: 0.2s">
           Connect with us for your complimentary consultation and experience the
@@ -69,7 +69,7 @@ import Layout from "../layouts/Layout.astro";
           <div class="pt-6 border-t border-stone-800/50">
             <p class="text-[11px] font-medium uppercase tracking-[0.2em] text-stone-500 mb-3">Services</p>
             <p class="text-sm text-stone-400 leading-relaxed">
-              Architecture &middot; Plans &middot; Permitting &middot; Consulting &middot; Tutorials
+              Consulting &middot; Architectural Plans &middot; Engineering Plans &amp; Calculations &middot; Permitting &middot; Tutorials
             </p>
           </div>
         </div>
@@ -185,6 +185,19 @@ import Layout from "../layouts/Layout.astro";
                   class="w-full bg-transparent border-b border-stone-700 pb-3 text-base text-white placeholder-stone-600 focus:border-accent focus:outline-none transition-colors duration-300 resize-none"
                   placeholder="Describe your project, timeline, and any specific requirements..."
                 ></textarea>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  id="ct-constructionEstimate"
+                  name="constructionEstimate"
+                  value="yes"
+                  class="mt-1 h-4 w-4 shrink-0 rounded border-stone-600 bg-stone-950/50 text-accent focus:ring-2 focus:ring-accent/40 focus:ring-offset-0 focus:ring-offset-transparent accent-accent"
+                />
+                <label for="ct-constructionEstimate" class="text-base text-stone-400 leading-snug cursor-pointer">
+                  Get a complete construction estimate?
+                </label>
               </div>
 
               <div class="pt-4">
