@@ -102,12 +102,12 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
           </div>
         </div>
         <div style="background: #1c1917; padding: 16px 32px; text-align: center;">
-          <p style="color: #78716c; font-size: 12px; margin: 0;">Hit reply to respond directly to this lead.</p>
+          <p style="color: #78716c; font-size: 12px; margin: 0;">You cannot reply to this email. Email the lead directly at ${escapeHtml(body.email)}</p>
         </div>
       </div>`;
 
     const resendPayload = {
-      from: `${clientName} Leads <leads@submissions.socalwebexperts.com>`,
+      from: `${clientName} Leads <no-reply@submissions.socalwebexperts.com>`,
       to: [notificationEmail],
       reply_to: body.email,
       subject: `New Lead: ${body.name} — ${clientName}`,
