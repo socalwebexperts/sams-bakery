@@ -370,13 +370,17 @@ const processSteps = [
                 </label>
               </div>
 
+              <div id="home-form-error" class="hidden text-red-400 text-sm"></div>
+
               <div class="pt-2">
                 <button
                   type="submit"
-                  class="group inline-flex items-center gap-3 bg-white text-stone-950 px-10 py-3.5 text-[11px] font-semibold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-stone-200 w-full justify-center"
+                  id="home-submit-btn"
+                  class="group inline-flex items-center gap-3 bg-white text-stone-950 px-10 py-3.5 text-[11px] font-semibold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-stone-200 w-full justify-center disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Message
-                  <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                  <span id="home-btn-text">Send Message</span>
+                  <svg id="home-btn-arrow" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                  <svg id="home-btn-spinner" class="hidden w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
                 </button>
               </div>
             </form>
@@ -581,6 +585,11 @@ const processSteps = [
   function setupFormLogic(prefix: string) {
     const form = document.getElementById(`${prefix}-contact-form`) as HTMLFormElement;
     const success = document.getElementById(`${prefix}-form-success`)!;
+    const errorDiv = document.getElementById(`${prefix}-form-error`)!;
+    const submitBtn = document.getElementById(`${prefix}-submit-btn`) as HTMLButtonElement;
+    const btnText = document.getElementById(`${prefix}-btn-text`)!;
+    const btnArrow = document.getElementById(`${prefix}-btn-arrow`)!;
+    const btnSpinner = document.getElementById(`${prefix}-btn-spinner`)!;
     const typeSelect = document.getElementById(`${prefix}-projectType`) as HTMLSelectElement;
     const subWrap = document.getElementById(`${prefix}-subcategory-wrap`)!;
     const subSelect = document.getElementById(`${prefix}-subcategory`) as HTMLSelectElement;
@@ -623,10 +632,42 @@ const processSteps = [
       else hideSub();
     });
 
-    form?.addEventListener("submit", (e) => {
+    form?.addEventListener("submit", async (e) => {
       e.preventDefault();
-      form.style.display = "none";
-      success.classList.remove("hidden");
+      errorDiv.classList.add("hidden");
+      errorDiv.textContent = "";
+      submitBtn.disabled = true;
+      btnText.textContent = "Sending...";
+      btnArrow.classList.add("hidden");
+      btnSpinner.classList.remove("hidden");
+
+      const data = Object.fromEntries(new FormData(form));
+
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        const json = await res.json();
+
+        if (res.ok && json.success) {
+          form.style.display = "none";
+          success.classList.remove("hidden");
+        } else {
+          errorDiv.textContent = json.error || "Something went wrong. Please try again.";
+          errorDiv.classList.remove("hidden");
+        }
+      } catch {
+        errorDiv.textContent = "Network error. Please check your connection and try again.";
+        errorDiv.classList.remove("hidden");
+      } finally {
+        submitBtn.disabled = false;
+        btnText.textContent = "Send Message";
+        btnArrow.classList.remove("hidden");
+        btnSpinner.classList.add("hidden");
+      }
     });
   }
 
