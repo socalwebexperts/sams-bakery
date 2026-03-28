@@ -3,18 +3,18 @@ import Layout from "../layouts/Layout.astro";
 import { portfolioItems } from "../data/portfolio";
 
 const portfolioTileSlugs = [
-  "glendale-mills-avenue",
-  "form-finding-site-study",
-  "tujunga-irma-adu",
-  "educational-facility-planning",
+  "linda-vista",
+  "mentor-ave-adu",
+  "skinny-martini-distillery",
+  "bac-art-center",
 ] as const;
 
 const portfolioTiles = (
   [
-    "Residential Remodeling Projects",
-    "Land Surveying Projects",
+    "Residential Projects",
     "ADU Projects",
-    "Commercial Projects",
+    "Commercial Interiors",
+    "Institutional Projects",
   ] as const
 ).map((label, i) => {
   const project = portfolioItems.find((p) => p.slug === portfolioTileSlugs[i])!;
