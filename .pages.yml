@@ -1,0 +1,171 @@
+media:
+  - name: portfolio-images
+    label: Portfolio Images
+    input: public/media/portfolio
+    output: /media/portfolio
+    categories: [image]
+    rename: true
+    extensions: [jpg, jpeg, png, webp, gif]
+
+content:
+  - name: portfolio
+    label: Portfolio
+    type: collection
+    path: src/content/portfolio
+    format: yaml-frontmatter
+    filename:
+      template: "{slug}.md"
+      field: create
+    view:
+      primary: title
+      fields: [title, category, portfolioGroup, status, year]
+      sort:
+        field: order
+        direction: asc
+    fields:
+      - name: title
+        label: Project Title
+        type: string
+        required: true
+        options:
+          maxlength: 120
+
+      - name: slug
+        label: URL Slug
+        type: string
+        required: true
+        description: "URL-friendly identifier (e.g. linda-vista). Lowercase, hyphens only."
+
+      - name: category
+        label: Category
+        type: select
+        required: true
+        options:
+          values:
+            - name: residential
+              label: Residential
+            - name: commercial
+              label: Commercial
+
+      - name: portfolioGroup
+        label: Portfolio Section
+        type: select
+        required: true
+        description: "Which section this project appears under on the portfolio page."
+        options:
+          values:
+            - name: residential
+              label: Residential Projects
+            - name: adu
+              label: ADU Projects
+            - name: commercial
+              label: Commercial Projects
+
+      - name: location
+        label: Location
+        type: string
+        required: true
+
+      - name: year
+        label: Year
+        type: string
+        required: true
+        description: "Year or year range (e.g. 2024 or 2024–2025)"
+
+      - name: status
+        label: Status
+        type: select
+        required: true
+        options:
+          values:
+            - name: Completed
+              label: Completed
+            - name: In Progress
+              label: In Progress
+
+      - name: order
+        label: Display Order
+        type: number
+        description: "Lower numbers appear first."
+
+      - name: heroImage
+        label: Hero Image
+        type: image
+        required: true
+        description: "Full-width hero image for the project detail page."
+        options:
+          media: portfolio-images
+          extensions: [jpg, jpeg, png, webp]
+
+      - name: thumbnail
+        label: Thumbnail
+        type: image
+        required: true
+        description: "Card image for portfolio listings."
+        options:
+          media: portfolio-images
+          extensions: [jpg, jpeg, png, webp]
+
+      - name: description
+        label: Short Description
+        type: text
+        required: true
+        description: "Brief project summary shown on portfolio listings."
+
+      - name: details
+        label: Project Details
+        type: text
+        description: "Extended project description shown on the detail page."
+
+      - name: scope
+        label: Scope of Work
+        type: string
+        description: "Comma-separated list of services (e.g. Architecture, Interior Design, Plans)"
+
+      - name: gallery
+        label: Gallery
+        type: image
+        description: "Project gallery images. Upload photos and videos for the project gallery."
+        options:
+          media: portfolio-images
+          multiple:
+            max: 20
+          unique: true
+          extensions: [jpg, jpeg, png, webp]
+
+  - name: site-settings
+    label: Site Settings
+    type: file
+    path: src/data/site-settings.json
+    format: json
+    fields:
+      - name: siteName
+        label: Site Name
+        type: string
+      - name: tagline
+        label: Tagline
+        type: string
+      - name: description
+        label: Site Description
+        type: text
+      - name: logoUrl
+        label: Logo URL
+        type: string
+      - name: contactEmail
+        label: Contact Email
+        type: string
+      - name: contactPhone
+        label: Contact Phone
+        type: string
+      - name: contactLocation
+        label: Location
+        type: string
+
+settings:
+  content:
+    merge: true
+  commit:
+    templates:
+      create: "content: add {filename}"
+      update: "content: update {filename}"
+      delete: "content: remove {filename}"

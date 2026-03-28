@@ -1,6 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { portfolioItems, type PortfolioGroup } from "../../data/portfolio";
+import { getPortfolioItems, type PortfolioGroup } from "../../data/portfolio";
+
+const portfolioItems = await getPortfolioItems();
 
 const sectionOrder: { group: PortfolioGroup; label: string }[] = [
   { group: "residential", label: "Residential Projects" },

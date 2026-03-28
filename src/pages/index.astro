@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { portfolioItems } from "../data/portfolio";
+import { getPortfolioItems } from "../data/portfolio";
 import {
   processSteps,
   homeServices,
@@ -8,6 +8,8 @@ import {
   featuredPortfolioSlugs,
   featuredPortfolioLabels,
 } from "../data/home";
+
+const portfolioItems = await getPortfolioItems();
 
 const portfolioTiles = featuredPortfolioLabels.map((label, i) => {
   const project = portfolioItems.find((p) => p.slug === featuredPortfolioSlugs[i])!;
