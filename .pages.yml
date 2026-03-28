@@ -14,27 +14,28 @@ content:
     path: src/content/portfolio
     format: yaml-frontmatter
     filename:
-      template: "{slug}.md"
-      field: create
+      template: "{fields.urlName}.md"
+      field: false
     view:
       primary: title
-      fields: [title, category, portfolioGroup, status, year]
+      fields: [title, category, portfolioGroup, status, year, urlName]
       sort:
-        field: order
+        field: title
         direction: asc
     fields:
-      - name: title
-        label: Project Title
+      - name: urlName
+        label: Project file name
         type: string
         required: true
+        description: "Name only (no .md). Spaces become dashes in the file and URL (e.g. My New Build → my-new-build.md). Set once when creating; to change the URL, rename the file in Git."
+
+      - name: title
+        label: Project title
+        type: string
+        required: true
+        description: "ALL CAPS on the site (e.g. 1860 LINDA VISTA)."
         options:
           maxlength: 120
-
-      - name: slug
-        label: URL Slug
-        type: string
-        required: true
-        description: "URL-friendly identifier (e.g. linda-vista). Lowercase, hyphens only."
 
       - name: category
         label: Category
@@ -65,6 +66,7 @@ content:
         label: Location
         type: string
         required: true
+        description: "ALL CAPS on the site (e.g. LOS ANGELES, CA)."
 
       - name: year
         label: Year
@@ -83,25 +85,11 @@ content:
             - name: In Progress
               label: In Progress
 
-      - name: order
-        label: Display Order
-        type: number
-        description: "Lower numbers appear first."
-
       - name: heroImage
-        label: Hero Image
+        label: Hero image
         type: image
         required: true
-        description: "Full-width hero image for the project detail page."
-        options:
-          media: portfolio-images
-          extensions: [jpg, jpeg, png, webp]
-
-      - name: thumbnail
-        label: Thumbnail
-        type: image
-        required: true
-        description: "Card image for portfolio listings."
+        description: "Used for the hero and for portfolio cards (thumbnail)."
         options:
           media: portfolio-images
           extensions: [jpg, jpeg, png, webp]

@@ -23,16 +23,19 @@ const stringField = z.preprocess(unwrapMarkdownLink, z.string());
 const portfolio = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/portfolio" }),
   schema: z.object({
+    /** Drives filename in Pages CMS; slug on the site comes from the `.md` file name. */
+    urlName: z.string().optional(),
     title: stringField,
-    slug: stringField,
     category: z.enum(["commercial", "residential"]),
     portfolioGroup: z.enum(["residential", "adu", "commercial"]),
     location: stringField,
     year: stringField,
     status: z.enum(["Completed", "In Progress"]),
-    order: z.number().optional().default(99),
+    /** Legacy sort key; omitted on new CMS entries so they sort after numbered projects. */
+    order: z.number().optional(),
     heroImage: stringField,
-    thumbnail: stringField,
+    /** Deprecated; listing uses heroImage when missing. */
+    thumbnail: stringField.optional(),
     description: stringField,
     details: z.preprocess(unwrapMarkdownLink, z.string().optional().default("")),
     scope: z.preprocess(unwrapMarkdownLink, z.string().optional().default("")),
