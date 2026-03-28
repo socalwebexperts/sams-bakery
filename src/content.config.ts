@@ -1,23 +1,42 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
+/** Pages CMS sometimes writes image fields as markdown links `[label](url)`. */
+function unwrapMarkdownLink(val: unknown): unknown {
+  if (typeof val !== "string") return val;
+  const m = val.trim().match(/^\[([^\]]*)\]\(([^)]+)\)$/);
+  return m ? m[2] : val;
+}
+
+function normalizeGalleryInput(val: unknown): unknown {
+  if (val == null || val === "") return [];
+  if (Array.isArray(val)) return val.map((item) => unwrapMarkdownLink(item));
+  if (typeof val === "string") {
+    const one = unwrapMarkdownLink(val);
+    return typeof one === "string" ? [one] : [];
+  }
+  return val;
+}
+
+const stringField = z.preprocess(unwrapMarkdownLink, z.string());
+
 const portfolio = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/portfolio" }),
   schema: z.object({
-    title: z.string(),
-    slug: z.string(),
+    title: stringField,
+    slug: stringField,
     category: z.enum(["commercial", "residential"]),
     portfolioGroup: z.enum(["residential", "adu", "commercial"]),
-    location: z.string(),
-    year: z.string(),
+    location: stringField,
+    year: stringField,
     status: z.enum(["Completed", "In Progress"]),
     order: z.number().optional().default(99),
-    heroImage: z.string(),
-    thumbnail: z.string(),
-    description: z.string(),
-    details: z.string().optional().default(""),
-    scope: z.string().optional().default(""),
-    gallery: z.union([z.array(z.string()), z.string()]).optional().default([]),
+    heroImage: stringField,
+    thumbnail: stringField,
+    description: stringField,
+    details: z.preprocess(unwrapMarkdownLink, z.string().optional().default("")),
+    scope: z.preprocess(unwrapMarkdownLink, z.string().optional().default("")),
+    gallery: z.preprocess(normalizeGalleryInput, z.array(z.string()).default([])),
   }),
 });
 
