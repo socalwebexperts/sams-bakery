@@ -8,6 +8,7 @@ import {
   featuredPortfolioSlugs,
   featuredPortfolioLabels,
 } from "../data/home";
+import { homeAboutHighlights, splitStatNumber } from "../data/stats";
 
 const portfolioItems = await getPortfolioItems();
 
@@ -165,14 +166,18 @@ const portfolioTiles = featuredPortfolioLabels.map((label, i) => {
           </p>
 
           <div class="mt-12 grid grid-cols-2 gap-8">
-            <div>
-              <p class="font-[Playfair_Display] text-3xl lg:text-4xl text-white">15<span class="text-accent">+</span></p>
-              <p class="text-[11px] font-medium uppercase tracking-[0.2em] text-stone-500 mt-2">Years Experience</p>
-            </div>
-            <div>
-              <p class="font-[Playfair_Display] text-3xl lg:text-4xl text-white">200<span class="text-accent">+</span></p>
-              <p class="text-[11px] font-medium uppercase tracking-[0.2em] text-stone-500 mt-2">Projects Delivered</p>
-            </div>
+            {homeAboutHighlights.map(({ number, label }) => {
+              const { main, suffix } = splitStatNumber(number);
+              return (
+                <div>
+                  <p class="font-[Playfair_Display] text-3xl lg:text-4xl text-white">
+                    {main}
+                    {suffix ? <span class="text-accent">{suffix}</span> : null}
+                  </p>
+                  <p class="text-[11px] font-medium uppercase tracking-[0.2em] text-stone-500 mt-2">{label}</p>
+                </div>
+              );
+            })}
           </div>
 
           <a

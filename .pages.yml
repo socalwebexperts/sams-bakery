@@ -24,16 +24,23 @@ content:
         direction: asc
     fields:
       - name: urlName
-        label: Project file name
+        label: Project URL name
         type: string
         required: true
-        description: "Name only (no .md). Spaces become dashes in the file and URL (e.g. My New Build → my-new-build.md). Set once when creating; to change the URL, rename the file in Git."
+        description: >
+          Enter the project name as it should appear in the website link.
+          Spaces will become dashes automatically
+          (e.g. "My Beach House" becomes my-beach-house).
+          Set this once when creating the project — don't change it later.
 
       - name: title
         label: Project title
         type: string
         required: true
-        description: "ALL CAPS on the site (e.g. 1860 LINDA VISTA)."
+        description: >
+          The title shown on the website. It will automatically appear in
+          uppercase, so you can type it however you like
+          (e.g. "1860 Linda Vista").
         options:
           maxlength: 120
 
@@ -41,6 +48,7 @@ content:
         label: Category
         type: select
         required: true
+        description: "Is this a residential or commercial project?"
         options:
           values:
             - name: residential
@@ -49,10 +57,10 @@ content:
               label: Commercial
 
       - name: portfolioGroup
-        label: Portfolio Section
+        label: Portfolio section
         type: select
         required: true
-        description: "Which section this project appears under on the portfolio page."
+        description: "Which section of the portfolio page should this project appear in?"
         options:
           values:
             - name: residential
@@ -66,18 +74,21 @@ content:
         label: Location
         type: string
         required: true
-        description: "ALL CAPS on the site (e.g. LOS ANGELES, CA)."
+        description: >
+          City and state (e.g. "Los Angeles, CA").
+          It will automatically appear in uppercase on the website.
 
       - name: year
         label: Year
         type: string
         required: true
-        description: "Year or year range (e.g. 2024 or 2024–2025)"
+        description: 'The year the project was completed, or a range (e.g. "2024" or "2023–2025").'
 
       - name: status
         label: Status
         type: select
         required: true
+        description: "Current status of the project."
         options:
           values:
             - name: Completed
@@ -86,68 +97,48 @@ content:
               label: In Progress
 
       - name: heroImage
-        label: Hero image
+        label: Main photo
         type: image
         required: true
-        description: "Used for the hero and for portfolio cards (thumbnail)."
+        description: >
+          The main photo for this project. It is also used as the
+          thumbnail on the portfolio page.
         options:
           media: portfolio-images
           extensions: [jpg, jpeg, png, webp]
 
       - name: description
-        label: Short Description
+        label: Short description
         type: text
         required: true
-        description: "Brief project summary shown on portfolio listings."
+        description: >
+          A brief summary of the project (1–2 sentences).
+          This appears on the portfolio listing page.
 
       - name: details
-        label: Project Details
+        label: Detailed description
         type: text
-        description: "Extended project description shown on the detail page."
+        description: >
+          A longer write-up shown on the project's full page.
+          Leave blank if you don't need one.
 
       - name: scope
-        label: Scope of Work
+        label: Scope of work
         type: string
-        description: "Comma-separated list of services (e.g. Architecture, Interior Design, Plans)"
+        description: >
+          List the services provided, separated by commas
+          (e.g. "Architecture, Interior Design, Plans").
 
       - name: gallery
         label: Gallery
         type: image
-        description: "Project gallery images. Upload photos and videos for the project gallery."
+        description: "Photos for the project gallery. You can add up to 20 images."
         options:
           media: portfolio-images
           multiple:
             max: 20
           unique: true
           extensions: [jpg, jpeg, png, webp]
-
-  - name: site-settings
-    label: Site Settings
-    type: file
-    path: src/data/site-settings.json
-    format: json
-    fields:
-      - name: siteName
-        label: Site Name
-        type: string
-      - name: tagline
-        label: Tagline
-        type: string
-      - name: description
-        label: Site Description
-        type: text
-      - name: logoUrl
-        label: Logo URL
-        type: string
-      - name: contactEmail
-        label: Contact Email
-        type: string
-      - name: contactPhone
-        label: Contact Phone
-        type: string
-      - name: contactLocation
-        label: Location
-        type: string
 
 settings:
   content:

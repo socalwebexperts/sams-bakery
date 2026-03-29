@@ -10,7 +10,6 @@ export interface PortfolioItem {
   location: string;
   year: string;
   status: "Completed" | "In Progress";
-  /** Lower = earlier; omitted in CMS → sorts last among peers. */
   order?: number;
   heroImage: string;
   thumbnail: string;
@@ -27,16 +26,7 @@ function slugFromEntryId(id: string): string {
   return segment.replace(/\.md$/i, "");
 }
 
-function normalizeGallery(raw: string | string[] | undefined): string[] {
-  if (!raw) return [];
-  if (Array.isArray(raw)) return raw;
-  return raw
-    .split(",")
-    .map((s) => s.trim())
-    .filter(Boolean);
-}
-
-function normalizeScope(raw: string | string[] | undefined): string[] {
+function splitList(raw: string | string[] | undefined): string[] {
   if (!raw) return [];
   if (Array.isArray(raw)) return raw;
   return raw
@@ -50,19 +40,19 @@ function mapEntry(entry: CollectionEntry<"portfolio">): PortfolioItem {
   const heroImage = entry.data.heroImage;
   return {
     slug,
-    title: entry.data.title.toLocaleUpperCase("en-US"),
-    category: entry.data.category,
-    portfolioGroup: entry.data.portfolioGroup,
-    location: entry.data.location.toLocaleUpperCase("en-US"),
+    title: entry.data.title,
+    category: entry.data.category as PortfolioItem["category"],
+    portfolioGroup: entry.data.portfolioGroup as PortfolioGroup,
+    location: entry.data.location,
     year: entry.data.year,
-    status: entry.data.status,
+    status: entry.data.status as PortfolioItem["status"],
     order: entry.data.order,
     heroImage,
     thumbnail: entry.data.thumbnail ?? heroImage,
     description: entry.data.description,
     details: entry.data.details ?? "",
-    scope: normalizeScope(entry.data.scope),
-    gallery: normalizeGallery(entry.data.gallery),
+    scope: splitList(entry.data.scope),
+    gallery: splitList(entry.data.gallery),
   };
 }
 

@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { aboutLeadershipStats } from "../data/stats";
 ---
 
 <Layout title="About" description="Learn about E.V Design Studio — our philosophy, process, and the team behind award-winning architectural design.">
@@ -191,11 +192,7 @@ import Layout from "../layouts/Layout.astro";
             construction teams have been cultivated over years of successful collaboration.
           </p>
           <div class="mt-8 grid grid-cols-3 gap-8">
-            {[
-              { stat: "150+", label: "Projects" },
-              { stat: "12+", label: "Years" },
-              { stat: "100%", label: "Approvals" },
-            ].map((s) => (
+            {aboutLeadershipStats.map((s) => (
               <div>
                 <span class="font-[Playfair_Display] text-2xl text-white">{s.stat}</span>
                 <p class="mt-1 text-[10px] font-medium uppercase tracking-[0.2em] text-stone-500">{s.label}</p>

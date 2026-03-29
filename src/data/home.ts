@@ -83,12 +83,7 @@ export const homeServices = [
   },
 ];
 
-export const homeStats = [
-  { number: "150+", label: "Projects Completed" },
-  { number: "12+", label: "Years Experience" },
-  { number: "100%", label: "Permit Approval Rate" },
-  { number: "50+", label: "Satisfied Clients" },
-];
+export { homeStats } from "./stats";
 
 export const featuredPortfolioSlugs = [
   "linda-vista",
