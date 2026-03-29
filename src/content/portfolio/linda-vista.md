@@ -1,5 +1,4 @@
 ---
-urlName: Linda Vista
 title: "1860 LINDA VISTA"
 category: residential
 portfolioGroup: residential

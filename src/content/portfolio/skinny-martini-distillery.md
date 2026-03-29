@@ -1,5 +1,4 @@
 ---
-urlName: Skinny Martini Distillery
 title: "SKINNY MARTINI DISTILLERY"
 category: commercial
 portfolioGroup: commercial

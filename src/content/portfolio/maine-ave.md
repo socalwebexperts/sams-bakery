@@ -1,5 +1,4 @@
 ---
-urlName: Maine Ave
 title: "2435 MAINE AVE"
 category: residential
 portfolioGroup: residential

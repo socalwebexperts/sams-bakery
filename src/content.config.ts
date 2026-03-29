@@ -52,7 +52,6 @@ const optionalTrimmed = z.preprocess(trimString, z.string().optional().default("
 const portfolio = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/portfolio" }),
   schema: z.object({
-    urlName: z.preprocess(trimString, z.string().optional()),
     title: upper,
     category: flexEnum(["commercial", "residential"] as const),
     portfolioGroup: flexEnum(["residential", "adu", "commercial"] as const),

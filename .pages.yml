@@ -14,33 +14,26 @@ content:
     path: src/content/portfolio
     format: yaml-frontmatter
     filename:
-      template: "{fields.urlName}.md"
+      template: "{primary}.md"
       field: false
     view:
       primary: title
-      fields: [title, category, portfolioGroup, status, year, urlName]
+      fields: [title, category, portfolioGroup, status, year]
       sort:
         field: title
         direction: asc
     fields:
-      - name: urlName
-        label: Project URL name
-        type: string
-        required: true
-        description: >
-          Enter the project name as it should appear in the website link.
-          Spaces will become dashes automatically
-          (e.g. "My Beach House" becomes my-beach-house).
-          Set this once when creating the project — don't change it later.
-
       - name: title
         label: Project title
         type: string
         required: true
         description: >
-          The title shown on the website. It will automatically appear in
-          uppercase, so you can type it however you like
-          (e.g. "1860 Linda Vista").
+          The title shown on the website (uppercase on the site).
+          When you first save a new project, the page address is created
+          automatically from this title (for example, "My Beach House"
+          becomes /portfolio/my-beach-house). Pick the title carefully
+          when creating the project; the address stays the same even if
+          you edit the title later.
         options:
           maxlength: 120
 

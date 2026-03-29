@@ -1,5 +1,4 @@
 ---
-urlName: BAC Art Center
 title: "BAC — ART CENTER"
 category: commercial
 portfolioGroup: commercial

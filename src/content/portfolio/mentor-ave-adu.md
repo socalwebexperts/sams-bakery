@@ -1,5 +1,4 @@
 ---
-urlName: Mentor Ave ADU
 title: "MENTOR AVE — ADU"
 category: residential
 portfolioGroup: adu

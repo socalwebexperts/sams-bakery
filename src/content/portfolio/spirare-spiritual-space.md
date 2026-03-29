@@ -1,5 +1,4 @@
 ---
-urlName: Spirare Spiritual Space
 title: "SPIRARE — SPIRITUAL SPACE"
 category: commercial
 portfolioGroup: commercial
