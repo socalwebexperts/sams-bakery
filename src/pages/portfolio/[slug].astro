@@ -117,9 +117,13 @@ const relatedProjects = allItems
   <!-- Gallery -->
   <section class="pb-20 lg:pb-28">
     <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div
+        id="portfolio-gallery"
+        class="grid grid-cols-1 md:grid-cols-2 gap-4"
+      >
         {project.gallery.map((item, i) => {
           const isVideo = /\.(mp4|webm|mov)$/i.test(item);
+          const imgAlt = `${project.title} - Image ${i + 1}`;
           return (
             <div
               class:list={[
@@ -138,12 +142,25 @@ const relatedProjects = allItems
                   <track kind="captions" />
                 </video>
               ) : (
-                <img
-                  src={item}
-                  alt={`${project.title} - Image ${i + 1}`}
-                  class="h-full w-full object-cover hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
-                />
+                <button
+                  type="button"
+                  class="group relative block h-full w-full cursor-zoom-in overflow-hidden border-0 bg-transparent p-0 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  data-lightbox-src={item}
+                  data-lightbox-alt={imgAlt}
+                  aria-label={`Open full size: ${imgAlt}`}
+                >
+                  <img
+                    src={item}
+                    alt={imgAlt}
+                    class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span
+                    class="pointer-events-none absolute inset-0 bg-stone-950/0 transition-colors duration-300 group-hover:bg-stone-950/10 group-focus-visible:bg-stone-950/15"
+                    aria-hidden="true"
+                  />
+                </button>
               )}
             </div>
           );
@@ -151,6 +168,34 @@ const relatedProjects = allItems
       </div>
     </div>
   </section>
+
+  <dialog
+    id="portfolio-lightbox"
+    aria-labelledby="portfolio-lightbox-title"
+  >
+    <p id="portfolio-lightbox-title" class="sr-only">
+      Enlarged project image
+    </p>
+    <button
+      type="button"
+      id="portfolio-lightbox-close"
+      class="absolute right-2 top-2 z-[210] flex h-11 w-11 items-center justify-center rounded-full border border-stone-600/80 bg-stone-900/90 text-stone-200 transition-colors hover:border-accent hover:bg-stone-800 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:right-6 md:top-6"
+      aria-label="Close"
+    >
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <img
+      id="portfolio-lightbox-img"
+      class="max-h-[85vh] max-w-full rounded-sm object-contain shadow-2xl shadow-black/50"
+      alt=""
+    />
+  </dialog>
+
+  <script>
+    import "../../scripts/portfolio-lightbox";
+  </script>
 
   <!-- Related Projects -->
   {relatedProjects.length > 0 && (
