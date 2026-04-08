@@ -28,12 +28,7 @@ content:
         type: string
         required: true
         description: >
-          The title shown on the website (uppercase on the site).
-          When you first save a new project, the page address is created
-          automatically from this title (for example, "My Beach House"
-          becomes /portfolio/my-beach-house). Pick the title carefully
-          when creating the project; the address stays the same even if
-          you edit the title later.
+          The title shown on the website.
         options:
           maxlength: 120
 
