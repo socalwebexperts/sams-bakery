@@ -6,7 +6,7 @@ location: LOS ANGELES, CA
 year: "2026"
 status: Completed
 order: 2
-heroImage: /media/portfolio/mentor-ave-adu-screenshot-2026-03-11-113818.png
+heroImage: /media/portfolio/screenshot-2026-04-08-211210.png
 description: A new accessory dwelling unit designed to maximize livable space on
   an existing residential lot while meeting all ADU code requirements for the
   City of Los Angeles.
