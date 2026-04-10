@@ -1,9 +1,9 @@
 {
-  "name": "astro-starter-template",
+  "name": "sams-bakery",
   "pages_build_output_dir": "./dist",
   "compatibility_date": "2026-03-24",
   "vars": {
-    "CLIENT_NAME": "Client Name",
-    "NOTIFICATION_EMAIL": "your-email@example.com"
+    "CLIENT_NAME": "Sam's Armenian Bakery",
+    "NOTIFICATION_EMAIL": "hello@samsbakery.com"
   }
 }

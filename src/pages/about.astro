@@ -2,6 +2,154 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="About">
-  <!-- Add about page sections here -->
+<Layout title="Our Story">
+
+  <!-- ═══ HERO BANNER ═══ -->
+  <section class="relative bg-stone-900 text-white py-24 lg:py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-stone-900/80 to-stone-900/95"></div>
+    <div class="relative max-w-3xl mx-auto px-4 text-center">
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl leading-tight mb-6">
+        The story behind the bakery that became a Glendale tradition.
+      </h1>
+    </div>
+  </section>
+
+  <!-- ═══ ORIGIN STORY ═══ -->
+  <section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-3xl mx-auto px-4">
+      <div class="prose prose-lg max-w-none">
+        <p class="text-stone-600 text-lg lg:text-xl leading-relaxed mb-6">
+          It all started with a love of baking and a suitcase full of family recipes. Sam arrived in
+          Glendale with a dream: to share the flavors of Armenia with a new community. He found a small
+          storefront on Raleigh Street, fired up the ovens, and began baking the breads and pastries
+          his family had perfected over generations.
+        </p>
+        <p class="text-stone-600 text-lg lg:text-xl leading-relaxed mb-6">
+          Word spread quickly. The aroma of fresh-baked gata, the perfect crunch of lahmajun, the soft
+          pull of a warm choreg — neighbors, then their friends, then food lovers from all over Los
+          Angeles began making the trip to that little bakery on Raleigh Street.
+        </p>
+        <p class="text-stone-600 text-lg lg:text-xl leading-relaxed">
+          Today, Sam's Armenian Bakery remains a cornerstone of the Glendale community. The recipes
+          have not changed. The ingredients are still the finest we can find. And every morning, the
+          ovens light up to carry forward a tradition that means everything to us.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TESTIMONIALS STRIP ═══ -->
+  <section class="bg-cream py-16 lg:py-20 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+        {[
+          {
+            quote: "The gata at Sam's is unlike anything else in Glendale. Absolutely divine.",
+            source: "Local Food Blog",
+          },
+          {
+            quote: "A true neighborhood gem — authentic, consistent, and always made with care.",
+            source: "Glendale Weekly",
+          },
+        ].map((item) => (
+          <blockquote class="border-l-2 border-primary/30 pl-6 lg:pl-8">
+            <p class="font-display text-xl lg:text-2xl text-stone-800 italic leading-relaxed mb-3">
+              "{item.quote}"
+            </p>
+            <cite class="not-italic text-sm tracking-[0.1em] uppercase text-stone-400 font-medium">{item.source}</cite>
+          </blockquote>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ THE SAM'S WAY ═══ -->
+  <section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid lg:grid-cols-2 items-center gap-0">
+        <div class="aspect-[4/3] lg:aspect-auto lg:h-[520px] bg-gradient-to-br from-amber-100 via-orange-50 to-amber-50 flex items-center justify-center">
+          <div class="text-center p-8">
+            <div class="w-24 h-24 mx-auto mb-3 rounded-full bg-primary/10 flex items-center justify-center">
+              <svg class="w-12 h-12 text-primary/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
+              </svg>
+            </div>
+            <p class="text-stone-400 text-xs tracking-wider uppercase">Baking Process Image</p>
+          </div>
+        </div>
+        <div class="px-6 py-16 lg:py-0 lg:px-12 xl:px-20">
+          <h2 class="font-serif text-3xl lg:text-4xl text-stone-900 mb-5 leading-tight">The Sam's Way</h2>
+          <p class="text-stone-600 leading-relaxed mb-4">
+            At Sam's, every pastry is a labor of love. We believe in doing things the right way —
+            giving dough time to rise, using real butter instead of shortcuts, and baking in small
+            batches so nothing leaves our kitchen that is not exceptional.
+          </p>
+          <p class="text-stone-600 leading-relaxed mb-4">
+            Quality is not just a word here; it is the foundation of everything we do. From selecting
+            the finest walnuts for our gata to milling our own spice blends for lahmajun, every detail
+            matters.
+          </p>
+          <p class="text-stone-600 leading-relaxed">
+            That is the Sam's way — and it is why our customers keep coming back.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ COMMUNITY ═══ -->
+  <section class="py-16 lg:py-24 bg-cream">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid lg:grid-cols-2 items-center gap-0">
+        <div class="px-6 py-16 lg:py-0 lg:px-12 xl:px-20 order-2 lg:order-1">
+          <h2 class="font-serif text-3xl lg:text-4xl text-stone-900 mb-5 leading-tight">Part of the Community</h2>
+          <p class="text-stone-600 leading-relaxed mb-4">
+            We have always been grateful for the warmth of the Glendale community. From our earliest
+            days, neighbors welcomed us, shared our pastries with their families, and helped spread
+            the word about what we do.
+          </p>
+          <p class="text-stone-600 leading-relaxed">
+            We strive to give back in every way we can — supporting local events, donating to community
+            organizations, and keeping our doors open as a gathering place where everyone feels at home.
+          </p>
+        </div>
+        <div class="aspect-[4/3] lg:aspect-auto lg:h-[520px] bg-gradient-to-bl from-rose-50 via-amber-50 to-orange-50 order-1 lg:order-2 flex items-center justify-center">
+          <div class="text-center p-8">
+            <div class="w-24 h-24 mx-auto mb-3 rounded-full bg-primary/10 flex items-center justify-center">
+              <svg class="w-12 h-12 text-primary/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
+              </svg>
+            </div>
+            <p class="text-stone-400 text-xs tracking-wider uppercase">Community Image</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ VISIT CTA ═══ -->
+  <section class="bg-stone-900 text-white py-16 lg:py-24">
+    <div class="max-w-2xl mx-auto px-4 text-center">
+      <h2 class="font-serif text-3xl lg:text-4xl text-white mb-4">Come Visit Us</h2>
+      <p class="text-stone-300 leading-relaxed mb-8">
+        We would love to welcome you to our bakery. Stop by for a fresh pastry, a warm loaf of bread,
+        or simply to say hello.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center px-8 py-3.5 bg-primary text-white text-sm tracking-[0.12em] uppercase font-medium hover:bg-primary-dark transition-colors"
+        >
+          Get Directions
+        </a>
+        <a
+          href="/menu"
+          class="inline-flex items-center justify-center px-8 py-3.5 border border-white/30 text-white text-sm tracking-[0.12em] uppercase font-medium hover:border-white transition-colors"
+        >
+          View Our Menu
+        </a>
+      </div>
+    </div>
+  </section>
+
 </Layout>

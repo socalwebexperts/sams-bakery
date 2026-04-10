@@ -1,0 +1,115 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Catering">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="relative bg-stone-900 text-white py-24 lg:py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-stone-900/80 to-stone-900/95"></div>
+    <div class="relative max-w-3xl mx-auto px-4 text-center">
+      <p class="text-xs tracking-[0.2em] uppercase text-primary-light font-medium mb-4">Catering Services</p>
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl leading-tight mb-6">
+        Bring the Bakery to Your Event
+      </h1>
+      <p class="text-stone-300 text-lg leading-relaxed max-w-xl mx-auto">
+        From intimate gatherings to grand celebrations, our catering delivers authentic Armenian
+        flavors and artisan presentation to every occasion.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ WHAT WE OFFER ═══ -->
+  <section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-12 lg:mb-16">
+        <p class="text-xs tracking-[0.2em] uppercase text-primary font-medium mb-3">What We Offer</p>
+        <h2 class="font-serif text-3xl lg:text-4xl text-stone-900">Catering Packages</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        {[
+          {
+            title: "Pastry Platters",
+            desc: "A curated selection of our finest pastries — gata, nazook, pakhlava, and more — beautifully arranged on elegant trays. Perfect for dessert tables, brunches, and receptions.",
+            details: "Serves 10–100+ guests",
+          },
+          {
+            title: "Bread & Savory Spreads",
+            desc: "Freshly baked lavash, matnakash, lahmajun, and beoereg platters paired with dips, cheeses, and accompaniments for a complete savory spread.",
+            details: "Serves 15–80+ guests",
+          },
+          {
+            title: "Full-Service Catering",
+            desc: "Our comprehensive package includes both sweet and savory selections, custom arrangements, delivery, and setup — everything handled so you can focus on your guests.",
+            details: "Custom quotes available",
+          },
+        ].map((item) => (
+          <div class="bg-cream p-8 lg:p-10">
+            <h3 class="font-serif text-xl text-stone-900 mb-3">{item.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed mb-4">{item.desc}</p>
+            <p class="text-xs tracking-[0.1em] uppercase text-primary font-medium">{item.details}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HOW IT WORKS ═══ -->
+  <section class="py-16 lg:py-24 bg-cream">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="font-serif text-3xl lg:text-4xl text-stone-900">How It Works</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          { step: "01", title: "Tell Us About Your Event", desc: "Share your event details, guest count, and preferences. We will help you choose the perfect selection." },
+          { step: "02", title: "We Prepare Everything", desc: "Our team handcrafts every item fresh for your event, with the same care we put into everything we bake." },
+          { step: "03", title: "Enjoy", desc: "We deliver and set up your order so everything is ready for your guests. All you need to do is enjoy." },
+        ].map((item) => (
+          <div class="text-center">
+            <span class="inline-block text-4xl font-display text-primary/20 mb-3">{item.step}</span>
+            <h3 class="font-serif text-lg text-stone-900 mb-2">{item.title}</h3>
+            <p class="text-sm text-stone-500 leading-relaxed">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GALLERY PLACEHOLDER ═══ -->
+  <section class="bg-white">
+    <div class="grid grid-cols-2 lg:grid-cols-4">
+      {[...Array(4)].map(() => (
+        <div class="aspect-square bg-gradient-to-br from-amber-50 to-orange-50 flex items-center justify-center">
+          <div class="text-center p-4">
+            <div class="w-12 h-12 mx-auto mb-2 rounded-full bg-primary/5 flex items-center justify-center">
+              <svg class="w-6 h-6 text-primary/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
+              </svg>
+            </div>
+            <p class="text-[10px] text-stone-400 tracking-wider uppercase">Catering Photo</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="bg-stone-900 py-16 lg:py-24">
+    <div class="max-w-2xl mx-auto px-4 text-center">
+      <h2 class="font-serif text-3xl lg:text-4xl text-white mb-4">Ready to Plan Your Event?</h2>
+      <p class="text-stone-300 leading-relaxed mb-8">
+        Let us know about your upcoming event and we will put together the perfect catering package for you.
+      </p>
+      <a
+        href="/contact"
+        class="inline-flex items-center justify-center px-8 py-3.5 bg-primary text-white text-sm tracking-[0.12em] uppercase font-medium hover:bg-primary-dark transition-colors"
+      >
+        Request a Quote
+      </a>
+    </div>
+  </section>
+
+</Layout>

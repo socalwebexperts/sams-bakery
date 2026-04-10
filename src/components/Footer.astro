@@ -1,9 +1,103 @@
 ---
-import { SITE } from "../data/site";
+import { SITE, NAV_LINKS, CONTACT_INFO } from "../data/site";
 
 const currentYear = new Date().getFullYear();
 ---
 
-<footer>
-  <p>&copy; {currentYear} {SITE.name}</p>
+<section class="bg-cream py-16 lg:py-20">
+  <div class="max-w-2xl mx-auto px-4 text-center">
+    <div class="w-12 h-12 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
+      <svg class="w-6 h-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+      </svg>
+    </div>
+    <h2 class="font-serif text-3xl lg:text-4xl text-stone-900 mb-3">Stay in the know.</h2>
+    <p class="text-stone-500 mb-8 text-sm lg:text-base">
+      Be the first to hear about seasonal specials, new pastries, and events at the bakery.
+    </p>
+    <form class="flex max-w-md mx-auto" onsubmit="return false;">
+      <input
+        type="email"
+        placeholder="Email"
+        class="flex-1 px-4 py-3 border border-stone-300 text-sm placeholder:text-stone-400 focus:outline-none focus:border-primary transition-colors"
+        required
+      />
+      <button
+        type="submit"
+        class="px-6 py-3 bg-primary text-white text-sm tracking-wider uppercase font-medium hover:bg-primary-dark transition-colors"
+      >
+        Join
+      </button>
+    </form>
+  </div>
+</section>
+
+<footer class="bg-stone-900 text-stone-300">
+  <div class="max-w-7xl mx-auto px-4 py-14 lg:py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+      <div class="lg:col-span-1">
+        <a href="/" class="inline-block mb-4">
+          <span class="font-serif text-2xl text-white block leading-tight">Sam's</span>
+          <span class="text-[0.55rem] tracking-[0.3em] uppercase text-stone-400 font-medium block -mt-0.5">Armenian Bakery</span>
+        </a>
+        <p class="text-sm text-stone-400 leading-relaxed max-w-xs">
+          Authentic Armenian pastries and breads, crafted with love and tradition in Glendale, California.
+        </p>
+      </div>
+
+      <div>
+        <h3 class="text-xs tracking-[0.2em] uppercase text-stone-400 font-medium mb-4">Explore</h3>
+        <ul class="space-y-2.5">
+          {NAV_LINKS.map(({ href, label }) => (
+            <li>
+              <a href={href} class="text-sm text-stone-300 hover:text-white transition-colors">{label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xs tracking-[0.2em] uppercase text-stone-400 font-medium mb-4">Visit Us</h3>
+        <address class="not-italic space-y-2.5 text-sm text-stone-300">
+          <p>{CONTACT_INFO.location}</p>
+          <p>
+            <a href={CONTACT_INFO.phoneHref} class="hover:text-white transition-colors">{CONTACT_INFO.phone}</a>
+          </p>
+          <p>
+            <a href={`mailto:${CONTACT_INFO.email}`} class="hover:text-white transition-colors">{CONTACT_INFO.email}</a>
+          </p>
+        </address>
+      </div>
+
+      <div>
+        <h3 class="text-xs tracking-[0.2em] uppercase text-stone-400 font-medium mb-4">Hours</h3>
+        <ul class="space-y-2.5 text-sm text-stone-300">
+          <li class="flex justify-between"><span>Mon – Sat</span><span>7 am – 7 pm</span></li>
+          <li class="flex justify-between"><span>Sunday</span><span>8 am – 5 pm</span></li>
+        </ul>
+        <div class="flex gap-4 mt-6">
+          <a href="#" class="text-stone-400 hover:text-white transition-colors" aria-label="Facebook">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+          </a>
+          <a href="#" class="text-stone-400 hover:text-white transition-colors" aria-label="Instagram">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"/></svg>
+          </a>
+          <a href="#" class="text-stone-400 hover:text-white transition-colors" aria-label="Yelp">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.806 14.2c-.082-.093-.22-.143-.403-.143h-.002l-2.416.072c-.255.008-.455.082-.583.218a.646.646 0 00-.14.558c.024.113.092.242.202.384.1.129.39.474.606.72l.064.072c.168.19.34.343.513.457.248.162.478.192.684.089.186-.093.36-.297.518-.605l.906-1.768c.1-.195.122-.36.07-.497a.468.468 0 00-.019-.057zm-1.583-2.386c-.14-.174-.38-.26-.708-.254l-2.434.1c-.257.012-.45.096-.575.249-.124.153-.152.343-.084.567.028.093.095.216.195.365.117.172.46.621.62.818l.043.052c.264.327.498.498.696.51.223.013.445-.086.661-.292.155-.148.286-.339.388-.567l.94-1.64c.103-.177.14-.344.113-.509a.64.64 0 00-.092-.201l-.003-.004-.002-.003c-.042-.059-.045-.063-.145-.165l-.003-.003-.003-.003c-.02-.025-.046-.053-.1-.11l-.001-.002c-.019-.022-.049-.056-.098-.107l-.001-.001-.002-.002-.016-.016a3.064 3.064 0 00-.12-.115c-.03-.027-.07-.061-.112-.093l-.001-.001a.904.904 0 00-.157-.097zM12.53 3.84a.678.678 0 00-.482-.198c-.237 0-.518.125-.837.371-.24.186-.434.413-.576.675L5.988 13.99c-.063.116-.086.273-.062.469.027.221.12.388.28.496.076.052.178.101.304.147l.15.049 2.377.613c.234.057.442.06.618.008a.67.67 0 00.42-.371l3.45-9.322c.122-.33.153-.605.092-.818a.573.573 0 00-.066-.154c-.089-.159-.224-.318-.388-.457a1.92 1.92 0 00-.633-.31zm-5.16 11.743c-.068-.204-.236-.352-.5-.437-.11-.035-.24-.061-.388-.077l-.076-.007-2.456-.116c-.349-.018-.605.05-.763.2a.628.628 0 00-.195.488c.003.191.068.418.191.676l1.276 2.66c.103.215.262.363.472.44.157.057.335.064.53.023.198-.043.4-.134.604-.272l1.437-.964c.286-.19.441-.382.464-.572.024-.193-.033-.438-.168-.726l-.088-.179-.002-.004a3.15 3.15 0 00-.071-.138c-.038-.07-.08-.14-.123-.2l-.001-.002a2.157 2.157 0 00-.143-.195zm-.84-2.7l-.04-.066-1.63-1.862a1.93 1.93 0 00-.477-.413.776.776 0 00-.544-.107c-.19.032-.353.16-.486.38l-1.248 2.09c-.102.17-.151.372-.147.598.003.167.04.32.11.459a.655.655 0 00.382.328c.096.033.22.06.37.078l.09.009 2.507.117c.305.011.538-.047.695-.172.156-.124.238-.304.245-.534 0-.03-.002-.065-.007-.103a2.1 2.1 0 00-.148-.504 2.743 2.743 0 00-.277-.429l-.005-.006-.003-.004a2.087 2.087 0 00-.166-.189l-.003-.004-.004-.004-.015-.016a.79.79 0 00-.054-.048l-.006-.006-.016-.015a1.162 1.162 0 00-.113-.092l-.001-.001-.003-.002a.928.928 0 00-.134-.075l-.093-.041z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-stone-800">
+    <div class="max-w-7xl mx-auto px-4 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-xs text-stone-500">&copy; {currentYear} {SITE.name}. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="/contact" class="text-xs text-stone-500 hover:text-stone-300 transition-colors">Contact Us</a>
+        <a href="#" class="text-xs text-stone-500 hover:text-stone-300 transition-colors">Privacy</a>
+        <a href="#" class="text-xs text-stone-500 hover:text-stone-300 transition-colors">Accessibility</a>
+      </div>
+    </div>
+  </div>
 </footer>

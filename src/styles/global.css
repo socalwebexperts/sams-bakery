@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
   --font-serif: "DM Serif Display", Georgia, serif;
   --font-display: "Playfair Display", Georgia, serif;
 
@@ -17,13 +17,20 @@
   --color-stone-100: #f5f5f4;
   --color-stone-50: #fafaf9;
 
-  --color-accent: #a8946b;
-  --color-accent-light: #c4b08d;
-  --color-accent-dark: #8a7753;
+  --color-cream: #fdfbf7;
+  --color-cream-dark: #f5f0e8;
 
-  --color-deep: #183138;
-  --color-deep-light: #1f3d46;
-  --color-deep-dark: #11242a;
+  --color-primary: #8b2332;
+  --color-primary-light: #a82d3f;
+  --color-primary-dark: #6e1a27;
+
+  --color-accent: #c49a6c;
+  --color-accent-light: #d4b08a;
+  --color-accent-dark: #a67d50;
+
+  --color-deep: #1c1917;
+  --color-deep-light: #292524;
+  --color-deep-dark: #0c0a09;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -37,5 +44,12 @@
 
   body {
     font-family: var(--font-sans);
+    color: var(--color-stone-900);
+    background-color: #ffffff;
+  }
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: #ffffff;
   }
 }

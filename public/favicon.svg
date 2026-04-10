@@ -1,4 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-  <rect width="48" height="48" fill="#0c0a09"/>
-  <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="600" fill="#fff" letter-spacing="1">EV</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Sam's Armenian Bakery">
+  <rect width="48" height="48" rx="10" fill="#8b2332"/>
+  <text
+    x="50%"
+    y="52%"
+    dominant-baseline="middle"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="26"
+    font-weight="600"
+    fill="#fdfbf7"
+    letter-spacing="-0.02em"
+  >S</text>
 </svg>
