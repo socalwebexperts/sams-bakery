@@ -16,8 +16,8 @@ export const NAV_LINKS = [
 
 export const CONTACT_INFO = {
   email: "ervin@evdesignstudio.com",
-  phone: "+1 (234) 567-890",
-  phoneHref: "tel:+1234567890",
+  phone: "+1 (818) 396-6772",
+  phoneHref: "tel:+18183966772",
   location: "Los Angeles, California",
 } as const;
 

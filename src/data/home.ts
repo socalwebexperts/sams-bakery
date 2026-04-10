@@ -85,16 +85,5 @@ export const homeServices = [
 
 export { homeStats } from "./stats";
 
-export const featuredPortfolioSlugs = [
-  "linda-vista",
-  "mentor-ave-adu",
-  "skinny-martini-distillery",
-  "bac-art-center",
-] as const;
-
-export const featuredPortfolioLabels = [
-  "Residential Projects",
-  "ADU Projects",
-  "Commercial Interiors",
-  "Institutional Projects",
-] as const;
+/** Max portfolio pieces shown per tab on the home “Selected Work” block. Use `PortfolioListing` with `maxItems={HOME_PORTFOLIO_PREVIEW_LIMIT}`. Omit `maxItems` on the full portfolio page for no cap. */
+export const HOME_PORTFOLIO_PREVIEW_LIMIT = 6;

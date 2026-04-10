@@ -1,28 +1,14 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getPortfolioItems, type PortfolioGroup } from "../../data/portfolio";
+import PortfolioListing from "../../components/PortfolioListing.astro";
+import { getPortfolioItems } from "../../data/portfolio";
 
 const portfolioItems = await getPortfolioItems();
-
-const sectionOrder: { group: PortfolioGroup; label: string }[] = [
-  { group: "residential", label: "Residential Projects" },
-  { group: "adu", label: "ADU Projects" },
-  { group: "commercial", label: "Commercial Projects" },
-];
-
-const sections = sectionOrder.map(({ group }) => ({
-  group,
-  projects: portfolioItems.filter((p) => p.portfolioGroup === group),
-}));
-
-function formatCategory(cat: string) {
-  return cat.charAt(0).toUpperCase() + cat.slice(1);
-}
 ---
 
 <Layout title="Portfolio" description="Explore our portfolio of residential and commercial architecture projects.">
-  <!-- Page Header -->
-  <section class="pt-36 pb-16 lg:pt-44 lg:pb-20">
+  <!-- Page Header + listing (same layout as before: intro, tabs, then projects) -->
+  <section class="pt-36 pb-28 lg:pt-44 lg:pb-40">
     <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
       <div class="max-w-3xl">
         <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-6 animate-fade-in">Our Work</p>
@@ -35,112 +21,9 @@ function formatCategory(cat: string) {
         </p>
       </div>
 
-      <!-- Filter tabs -->
-      <div class="mt-12 flex flex-wrap gap-1 animate-fade-up" style="animation-delay: 0.4s">
-        <button
-          type="button"
-          data-filter="all"
-          class="filter-btn active px-4 py-3 md:px-6 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.15em] md:tracking-[0.2em] text-white bg-stone-800 transition-all duration-300"
-        >
-          All
-        </button>
-        {sectionOrder.map(({ group, label }) => (
-          <button
-            type="button"
-            data-filter={group}
-            class="filter-btn px-4 py-3 md:px-6 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.15em] md:tracking-[0.2em] text-stone-500 hover:text-white transition-all duration-300"
-          >
-            {label}
-          </button>
-        ))}
-      </div>
+      <PortfolioListing items={portfolioItems} listingId="page" />
     </div>
   </section>
-
-  <!-- Portfolio by category -->
-  <section class="pb-28 lg:pb-40">
-    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
-      {sections.map(({ group, projects }) =>
-        projects.length > 0 ? (
-          <div class="portfolio-category mb-20 lg:mb-28 last:mb-0" data-portfolio-group={group}>
-            <div class="flex flex-col gap-16 lg:gap-24">
-              {projects.map((project, i) => (
-                <article
-                  class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 lg:items-center reveal-on-scroll"
-                  style={`transition-delay: ${Math.min(i * 0.08, 0.4)}s`}
-                >
-                  <a
-                    href={`/portfolio/${project.slug}`}
-                    class="group relative block aspect-[4/3] overflow-hidden lg:max-h-[min(100vw,28rem)]"
-                  >
-                    <img
-                      src={project.thumbnail}
-                      alt={project.title}
-                      class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                      loading="lazy"
-                    />
-                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-stone-950/50 via-transparent to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-80" />
-                  </a>
-
-                  <div class="flex flex-col justify-center min-w-0">
-                    <p class="text-[10px] font-medium uppercase tracking-[0.25em] text-stone-400 mb-3">
-                      {formatCategory(project.category)} &middot; {project.status}
-                    </p>
-                    <h3 class="font-[Playfair_Display] text-2xl md:text-3xl lg:text-[2rem] font-normal text-white leading-snug">
-                      {project.title}
-                    </h3>
-                    <p class="text-sm text-stone-400 mt-2">
-                      {project.location} &middot; {project.year}
-                    </p>
-                    <p class="mt-5 text-sm md:text-base leading-relaxed text-stone-500 line-clamp-4">
-                      {project.description}
-                    </p>
-                    <a
-                      href={`/portfolio/${project.slug}`}
-                      class="mt-8 inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.15em] text-stone-400 hover:text-white transition-colors duration-300 w-fit"
-                    >
-                      View Project
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                    </a>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        ) : null
-      )}
-    </div>
-  </section>
-
-  <script>
-    const buttons = document.querySelectorAll<HTMLButtonElement>(".filter-btn");
-    const categories = document.querySelectorAll<HTMLElement>(".portfolio-category");
-
-    function setFilter(filter: string) {
-      buttons.forEach((btn) => {
-        const isActive = btn.dataset.filter === filter;
-        btn.classList.toggle("active", isActive);
-        btn.classList.toggle("text-white", isActive);
-        btn.classList.toggle("bg-stone-800", isActive);
-        btn.classList.toggle("text-stone-500", !isActive);
-      });
-
-      categories.forEach((el) => {
-        const group = el.dataset.portfolioGroup;
-        const show = filter === "all" || group === filter;
-        el.classList.toggle("hidden", !show);
-      });
-    }
-
-    buttons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const f = btn.dataset.filter ?? "all";
-        setFilter(f);
-      });
-    });
-
-    setFilter("all");
-  </script>
 
   <!-- CTA -->
   <section class="py-24 lg:py-32 bg-deep">

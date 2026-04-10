@@ -79,3 +79,58 @@ export async function getPortfolioBySlug(slug: string) {
   const items = await getPortfolioItems();
   return items.find((item) => item.slug === slug);
 }
+
+/** Tab labels — shared by portfolio page and listing component. */
+export const PORTFOLIO_TAB_ORDER: { group: PortfolioGroup; label: string }[] = [
+  { group: "residential", label: "Residential Projects" },
+  { group: "adu", label: "ADU Projects" },
+  { group: "commercial", label: "Commercial Projects" },
+];
+
+export function formatCategoryLabel(cat: string) {
+  return cat.charAt(0).toUpperCase() + cat.slice(1);
+}
+
+export type PortfolioListingVariant = "unlimited" | "limited";
+
+export type PortfolioListingSection =
+  | { variant: "unlimited"; group: PortfolioGroup; projects: PortfolioItem[] }
+  | {
+      variant: "limited";
+      filterKey: "all" | PortfolioGroup;
+      projects: PortfolioItem[];
+    };
+
+/** Builds tab content for the portfolio listing. Pass `maxItems` to cap how many projects appear per tab (home); omit for full lists (portfolio page). */
+export function buildPortfolioListingSections(
+  items: PortfolioItem[],
+  maxItems?: number,
+): { variant: PortfolioListingVariant; sections: PortfolioListingSection[] } {
+  if (maxItems == null) {
+    return {
+      variant: "unlimited",
+      sections: PORTFOLIO_TAB_ORDER.map(({ group }) => ({
+        variant: "unlimited" as const,
+        group,
+        projects: items.filter((p) => p.portfolioGroup === group),
+      })),
+    };
+  }
+
+  const n = maxItems;
+  return {
+    variant: "limited",
+    sections: [
+      {
+        variant: "limited" as const,
+        filterKey: "all",
+        projects: items.slice(0, n),
+      },
+      ...(["residential", "adu", "commercial"] as const).map((group) => ({
+        variant: "limited" as const,
+        filterKey: group,
+        projects: items.filter((p) => p.portfolioGroup === group).slice(0, n),
+      })),
+    ],
+  };
+}

@@ -1,21 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PortfolioListing from "../components/PortfolioListing.astro";
 import { getPortfolioItems } from "../data/portfolio";
 import {
   processSteps,
   homeServices,
   homeStats,
-  featuredPortfolioSlugs,
-  featuredPortfolioLabels,
+  HOME_PORTFOLIO_PREVIEW_LIMIT,
 } from "../data/home";
 import { homeAboutHighlights, splitStatNumber } from "../data/stats";
+import { CONTACT_INFO } from "../data/site";
 
 const portfolioItems = await getPortfolioItems();
-
-const portfolioTiles = featuredPortfolioLabels.map((label, i) => {
-  const project = portfolioItems.find((p) => p.slug === featuredPortfolioSlugs[i])!;
-  return { ...project, label };
-});
 ---
 
 <Layout title="Home">
@@ -238,7 +234,7 @@ const portfolioTiles = featuredPortfolioLabels.map((label, i) => {
                     name="phone"
                     autocomplete="tel"
                     class="w-full bg-transparent border-b border-stone-700/80 pb-2.5 text-sm text-white placeholder-stone-600 focus:border-accent focus:outline-none transition-colors duration-300"
-                    placeholder="+1 (234) 567-890"
+                    placeholder={CONTACT_INFO.phone}
                   />
                 </div>
               </div>
@@ -373,14 +369,14 @@ const portfolioTiles = featuredPortfolioLabels.map((label, i) => {
     </div>
   </section>
 
-  <!-- Featured Projects -->
+  <!-- Selected Work (same listing as portfolio page; capped at 6 items per tab) -->
   <section class="py-24 lg:py-32">
     <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
-      <div class="flex items-end justify-between mb-16 reveal-on-scroll">
+      <div class="flex items-end justify-between reveal-on-scroll">
         <div>
-          <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-4">Selected Work</p>
+          <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-4">Our Work</p>
           <h2 class="font-[Playfair_Display] text-3xl md:text-4xl lg:text-5xl font-normal text-white">
-            Recent Projects
+            Selected Work
           </h2>
         </div>
         <a
@@ -392,46 +388,11 @@ const portfolioTiles = featuredPortfolioLabels.map((label, i) => {
         </a>
       </div>
 
-      <div class="grid grid-cols-2 gap-x-4 gap-y-8 lg:gap-x-6 lg:gap-y-10">
-        {portfolioTiles.map((project, i) => (
-          <div class="flex flex-col">
-            <h3
-              class="font-[Playfair_Display] text-lg md:text-xl lg:text-2xl font-normal text-stone-500/65 mb-3 lg:mb-4 tracking-tight reveal-on-scroll"
-              style={`transition-delay: ${i * 0.1}s`}
-            >
-              {project.label}
-            </h3>
-            <a
-              href={`/portfolio/${project.slug}`}
-              class="group relative aspect-square overflow-hidden reveal-on-scroll"
-              style={`transition-delay: ${i * 0.1}s`}
-            >
-              <img
-                src={project.thumbnail}
-                alt={project.title}
-                class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                loading="lazy"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/20 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500"></div>
-              <div class="absolute inset-0 flex flex-col justify-end p-6 lg:p-10">
-                <div class="transform transition-transform duration-500 group-hover:translate-y-0 translate-y-2">
-                  <p class="text-[10px] font-medium uppercase tracking-[0.25em] text-stone-400 mb-2">
-                    {project.category} &middot; {project.status}
-                  </p>
-                  <p class="font-[Playfair_Display] text-xl lg:text-2xl font-normal text-white leading-snug">
-                    {project.title}
-                  </p>
-                  <p class="text-sm text-stone-400 mt-1">{project.location}</p>
-                  <div class="mt-4 flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.15em] text-stone-400 group-hover:text-white transition-colors duration-300">
-                    <span>View Project</span>
-                    <svg class="w-3.5 h-3.5 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-        ))}
-      </div>
+      <PortfolioListing
+        items={portfolioItems}
+        maxItems={HOME_PORTFOLIO_PREVIEW_LIMIT}
+        listingId="home"
+      />
 
       <div class="mt-10 text-center md:hidden">
         <a
