@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "pages:dev": "wrangler pages dev ./dist",
-    "pages:deploy": "wrangler pages deploy ./dist --project-name=sams-bakery"
+    "pages:deploy": "wrangler pages deploy ./dist --project-name=sams-bakery",
+    "build:cloudflare": "sh scripts/cloudflare-build.sh"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.2",

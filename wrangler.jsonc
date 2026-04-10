@@ -1,4 +1,11 @@
 {
+  // Cloudflare Pages (GitHub): pnpm-lock.yaml is lockfile v9 — needs pnpm 9+.
+  // If the dependency step fails, either:
+  //   A) Dashboard → Settings → Environment variables → PNPM_VERSION = 10.16.1
+  //      (v3 build image default pnpm is already 10.x; v2 used pnpm 8 and breaks v9 lockfiles.)
+  //   B) Set SKIP_DEPENDENCY_INSTALL = 1 and Build command:
+  //      sh scripts/cloudflare-build.sh
+  // Build output directory must stay: dist
   "name": "sams-bakery",
   "pages_build_output_dir": "./dist",
   "compatibility_date": "2026-03-24",
