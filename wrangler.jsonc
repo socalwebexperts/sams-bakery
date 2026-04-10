@@ -6,9 +6,17 @@
   //   B) Set SKIP_DEPENDENCY_INSTALL = 1 and Build command:
   //      sh scripts/cloudflare-build.sh
   // Build output directory must stay: dist
+  //
+  // IMPORTANT: Do not run `wrangler deploy` for this repo — that targets Workers. Use:
+  //   pnpm pages:deploy   →  wrangler pages deploy ./dist
+  // Pages Git integration should only run the *build* (e.g. pnpm run build); leave Deploy command empty.
+  // `assets` exists so a mistaken `wrangler deploy` still has a valid static bundle; prefer pages deploy.
   "name": "sams-bakery",
   "pages_build_output_dir": "./dist",
   "compatibility_date": "2026-03-24",
+  "assets": {
+    "directory": "./dist"
+  },
   "vars": {
     "CLIENT_NAME": "Sam's Armenian Bakery",
     "NOTIFICATION_EMAIL": "hello@samsbakery.com"
