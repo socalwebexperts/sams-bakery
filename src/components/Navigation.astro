@@ -1,92 +1,14 @@
 ---
 import { SITE, NAV_LINKS } from "../data/site";
-
-const currentPath = Astro.url.pathname;
 ---
 
-<header id="main-nav" class="fixed top-0 left-0 right-0 z-50">
-  <!-- Scroll/blur on full-width `#nav-bar` only (not `<header>`) so the mobile menu stays
-       viewport-fixed. Inner `#nav-bar-inner` holds max-width + horizontal padding. -->
-  <div id="nav-bar" class="relative z-[60] w-full transition-all duration-500">
-    <div
-      id="nav-bar-inner"
-      class="mx-auto max-w-[1400px] px-6 lg:px-12 py-2 transition-all duration-500"
-    >
-      <div class="flex items-center justify-between">
-        <a href="/" class="relative z-[70] flex flex-col items-start gap-1 lg:gap-1.5">
-          <img src={SITE.logoUrl} alt={SITE.name} class="h-20 lg:h-28 w-auto" />
-          <span class="text-[11px] md:text-[12px] lg:text-[13px] font-medium uppercase tracking-[0.2em] text-accent leading-tight">
-            {SITE.tagline}
-          </span>
-        </a>
-
-        <nav class="hidden lg:flex items-center gap-10">
-          {NAV_LINKS.map(({ href, label }) => (
-            <a
-              href={href}
-              class:list={[
-                "relative text-[13px] font-medium uppercase tracking-[0.15em] transition-colors duration-300",
-                currentPath === href || (href !== "/" && currentPath.startsWith(href))
-                  ? "text-white"
-                  : "text-stone-200 hover:text-white",
-              ]}
-            >
-              {label}
-              {(currentPath === href || (href !== "/" && currentPath.startsWith(href))) && (
-                <span class="absolute -bottom-1 left-0 w-full h-px bg-accent" />
-              )}
-            </a>
-          ))}
-        </nav>
-
-        <a
-          href="/contact"
-          class="hidden lg:inline-flex items-center gap-2 border border-stone-500 px-5 py-2.5 text-[11px] font-medium uppercase tracking-[0.2em] text-stone-200 transition-all duration-300 hover:border-white hover:text-white hover:bg-white/5"
-        >
-          Get in Touch
-        </a>
-
-        <button
-          id="mobile-menu-btn"
-          class="relative z-[70] flex flex-col gap-1.5 lg:hidden p-2"
-          aria-label="Toggle menu"
-          aria-expanded="false"
-          aria-controls="mobile-menu"
-        >
-          <span class="menu-line block h-px w-6 bg-white transition-all duration-300 origin-center"></span>
-          <span class="menu-line block h-px w-6 bg-white transition-all duration-300"></span>
-          <span class="menu-line block h-px w-4 bg-white transition-all duration-300 origin-center"></span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div
-    id="mobile-menu"
-    class="fixed inset-0 z-50 bg-stone-950 flex flex-col items-center justify-center opacity-0 pointer-events-none transition-opacity duration-500 lg:hidden"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Main menu"
-  >
-    <nav class="flex flex-col items-center gap-8 px-6">
+<header>
+  <nav>
+    <a href="/">{SITE.name}</a>
+    <ul>
       {NAV_LINKS.map(({ href, label }) => (
-        <a
-          href={href}
-          class="font-[Playfair_Display] text-3xl font-light text-stone-300 hover:text-white transition-colors duration-300"
-        >
-          {label}
-        </a>
+        <li><a href={href}>{label}</a></li>
       ))}
-      <a
-        href="/contact"
-        class="mt-4 border border-stone-700 px-8 py-3 text-[11px] font-medium uppercase tracking-[0.2em] text-stone-300 hover:border-white hover:text-white transition-all duration-300"
-      >
-        Free Consultation
-      </a>
-    </nav>
-  </div>
+    </ul>
+  </nav>
 </header>
-
-<script>
-  import "../scripts/navigation";
-</script>

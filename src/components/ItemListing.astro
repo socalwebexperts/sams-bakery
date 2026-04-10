@@ -1,0 +1,17 @@
+---
+import { type ContentItem } from "../data/items";
+
+interface Props {
+  items: ContentItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul>
+  {items.map((item) => (
+    <li>
+      <a href={`/items/${item.slug}`}>{item.title}</a>
+    </li>
+  ))}
+</ul>

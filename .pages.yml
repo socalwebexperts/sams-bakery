@@ -1,132 +1,34 @@
 media:
-  - name: portfolio-images
-    label: Portfolio Images
-    input: public/media/portfolio
-    output: /media/portfolio
+  - name: uploads
+    label: Uploads
+    input: public/media/uploads
+    output: /media/uploads
     categories: [image]
     rename: true
     extensions: [jpg, jpeg, png, webp, gif]
 
 content:
-  - name: portfolio
-    label: Portfolio
+  - name: items
+    label: Items
     type: collection
-    path: src/content/portfolio
+    path: src/content/items
     format: yaml-frontmatter
     filename:
       template: "{primary}.md"
       field: false
     view:
       primary: title
-      fields: [title, category, portfolioGroup, status, year]
+      fields: [title]
       sort:
         field: title
         direction: asc
     fields:
       - name: title
-        label: Project title
+        label: Title
         type: string
         required: true
-        description: >
-          The title shown on the website.
         options:
           maxlength: 120
-
-      - name: category
-        label: Category
-        type: select
-        required: true
-        description: "Is this a residential or commercial project?"
-        options:
-          values:
-            - name: residential
-              label: Residential
-            - name: commercial
-              label: Commercial
-
-      - name: portfolioGroup
-        label: Portfolio section
-        type: select
-        required: true
-        description: "Which section of the portfolio page should this project appear in?"
-        options:
-          values:
-            - name: residential
-              label: Residential Projects
-            - name: adu
-              label: ADU Projects
-            - name: commercial
-              label: Commercial Projects
-
-      - name: location
-        label: Location
-        type: string
-        required: true
-        description: >
-          City and state (e.g. "Los Angeles, CA").
-          It will automatically appear in uppercase on the website.
-
-      - name: year
-        label: Year
-        type: string
-        required: true
-        description: 'The year the project was completed, or a range (e.g. "2024" or "2023–2025").'
-
-      - name: status
-        label: Status
-        type: select
-        required: true
-        description: "Current status of the project."
-        options:
-          values:
-            - name: Completed
-              label: Completed
-            - name: In Progress
-              label: In Progress
-
-      - name: heroImage
-        label: Main photo
-        type: image
-        required: true
-        description: >
-          The main photo for this project. It is also used as the
-          thumbnail on the portfolio page.
-        options:
-          media: portfolio-images
-          extensions: [jpg, jpeg, png, webp]
-
-      - name: description
-        label: Short description
-        type: text
-        required: true
-        description: >
-          A brief summary of the project (1–2 sentences).
-          This appears on the portfolio listing page.
-
-      - name: details
-        label: Detailed description
-        type: text
-        description: >
-          A longer write-up shown on the project's full page.
-          Leave blank if you don't need one.
-
-      - name: scope
-        label: Scope of work
-        type: string
-        description: >
-          List the services provided, separated by commas
-          (e.g. "Architecture, Interior Design, Plans").
-
-      - name: gallery
-        label: Gallery
-        type: image
-        description: "Photos for the project gallery. You can add up to 20 images."
-        options:
-          media: portfolio-images
-          multiple:
-            max: 20
-          unique: true
-          extensions: [jpg, jpeg, png, webp]
 
 settings:
   content:

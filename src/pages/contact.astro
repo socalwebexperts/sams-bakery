@@ -1,230 +1,78 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { CONTACT_INFO, SOCIAL_LINKS, SERVICES_TAGLINE } from "../data/site";
+import { CONTACT_INFO } from "../data/site";
 ---
 
-<Layout title="Contact" description="Get in touch with E.V Design Studio for your complimentary architectural consultation.">
-  <!-- Page Header -->
-  <section class="pt-36 pb-16 lg:pt-44 lg:pb-20">
-    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
-      <div class="max-w-3xl">
-        <p class="text-[11px] font-medium uppercase tracking-[0.3em] text-accent mb-6 animate-fade-in">Get in Touch</p>
-        <h1 class="font-[Playfair_Display] text-5xl md:text-6xl lg:text-7xl font-medium leading-[0.95] text-white animate-fade-up">
-          Contact Your<br />
-          <span class="italic font-normal text-stone-300">Specialist</span>
-        </h1>
-        <p class="mt-6 text-base lg:text-lg leading-relaxed text-stone-400 font-light max-w-xl animate-fade-up" style="animation-delay: 0.2s">
-          Connect with us for your complimentary consultation and experience the
-          level of service trusted by clients who demand the very best.
-        </p>
-      </div>
+<Layout title="Contact">
+  <!--
+    Contact form — POSTs to /api/contact (Cloudflare Pages Function → Resend).
+    setupFormLogic(prefix) wires: dynamic subcategory dropdown, submission states.
+    All element IDs use the ${prefix}-* convention. See AI-GUIDE.md.
+  -->
+
+  <p>{CONTACT_INFO.email}</p>
+  <p>{CONTACT_INFO.phone}</p>
+  <p>{CONTACT_INFO.location}</p>
+
+  <form id="ct-contact-form">
+    <div>
+      <label for="ct-name">Name *</label>
+      <input type="text" id="ct-name" name="name" required autocomplete="name" />
     </div>
-  </section>
 
-  <!-- Contact Content -->
-  <section class="pb-28 lg:pb-40">
-    <div class="mx-auto max-w-[1400px] px-6 lg:px-12">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20">
-        <!-- Contact Info -->
-        <div class="lg:col-span-4 space-y-12 reveal-on-scroll">
-          <div>
-            <h3 class="text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-4">Office</h3>
-            <p class="text-base text-stone-300 leading-relaxed">
-              {CONTACT_INFO.location}<br />
-              United States
-            </p>
-          </div>
-
-          <div>
-            <h3 class="text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-4">Email</h3>
-            <a
-              href={`mailto:${CONTACT_INFO.email}`}
-              class="text-base text-stone-300 hover:text-white transition-colors duration-300"
-            >
-              {CONTACT_INFO.email}
-            </a>
-          </div>
-
-          <div>
-            <h3 class="text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-4">Phone</h3>
-            <a
-              href={CONTACT_INFO.phoneHref}
-              class="text-base text-stone-300 hover:text-white transition-colors duration-300"
-            >
-              {CONTACT_INFO.phone}
-            </a>
-          </div>
-
-          <div>
-            <h3 class="text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-4">Follow</h3>
-            <div class="flex gap-5">
-              {SOCIAL_LINKS.map((social) => (
-                <a href={social.href} class="text-stone-500 hover:text-white transition-colors duration-300" aria-label={social.label}>
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" set:html={social.icon} />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div class="pt-6 border-t border-stone-800/50">
-            <p class="text-[11px] font-medium uppercase tracking-[0.2em] text-stone-500 mb-3">Services</p>
-            <p class="text-sm text-stone-400 leading-relaxed" set:html={SERVICES_TAGLINE} />
-          </div>
-        </div>
-
-        <!-- Contact Form -->
-        <div class="lg:col-span-8 reveal-on-scroll" style="transition-delay: 0.15s">
-          <div class="bg-deep/40 border border-white/5 p-8 lg:p-12">
-            <h2 class="font-[Playfair_Display] text-2xl md:text-3xl font-normal text-white mb-2">
-              Talk to A Specialist
-            </h2>
-            <p class="text-sm text-stone-500 mb-10">
-              Tell us about your project and we'll get back to you within 24 hours.
-            </p>
-
-            <form id="ct-contact-form" class="space-y-6">
-              <div>
-                <label for="ct-name" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
-                  Name *
-                </label>
-                <input
-                  type="text"
-                  id="ct-name"
-                  name="name"
-                  required
-                  autocomplete="name"
-                  class="w-full bg-transparent border-b border-stone-700 pb-3 text-base text-white placeholder-stone-600 focus:border-accent focus:outline-none transition-colors duration-300"
-                  placeholder="Your full name"
-                />
-              </div>
-
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label for="ct-email" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    id="ct-email"
-                    name="email"
-                    required
-                    autocomplete="email"
-                    class="w-full bg-transparent border-b border-stone-700 pb-3 text-base text-white placeholder-stone-600 focus:border-accent focus:outline-none transition-colors duration-300"
-                    placeholder="john@example.com"
-                  />
-                </div>
-                <div>
-                  <label for="ct-phone" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
-                    Phone
-                  </label>
-                  <input
-                    type="tel"
-                    id="ct-phone"
-                    name="phone"
-                    autocomplete="tel"
-                    class="w-full bg-transparent border-b border-stone-700 pb-3 text-base text-white placeholder-stone-600 focus:border-accent focus:outline-none transition-colors duration-300"
-                    placeholder={CONTACT_INFO.phone}
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label for="ct-address" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
-                  Project Address
-                </label>
-                <input
-                  type="text"
-                  id="ct-address"
-                  name="address"
-                  autocomplete="street-address"
-                  class="w-full bg-transparent border-b border-stone-700 pb-3 text-base text-white placeholder-stone-600 focus:border-accent focus:outline-none transition-colors duration-300"
-                  placeholder="123 Main St, Los Angeles, CA"
-                />
-              </div>
-
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
-                <div>
-                  <label for="ct-projectType" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
-                    Project Type
-                  </label>
-                  <select
-                    id="ct-projectType"
-                    name="projectType"
-                    class="w-full bg-transparent border-b border-stone-700 pb-3 text-base text-white focus:border-accent focus:outline-none transition-colors duration-300 appearance-none cursor-pointer"
-                  >
-                    <option value="" class="bg-stone-900">Select type</option>
-                    <option value="residential" class="bg-stone-900">Residential</option>
-                    <option value="commercial" class="bg-stone-900">Commercial</option>
-                  </select>
-                </div>
-                <div id="ct-subcategory-wrap" class="transition-all duration-300 ease-out opacity-0 max-h-0 overflow-hidden pointer-events-none">
-                  <label for="ct-subcategory" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
-                    Scope
-                  </label>
-                  <select
-                    id="ct-subcategory"
-                    name="subcategory"
-                    class="w-full bg-transparent border-b border-stone-700 pb-3 text-base text-white focus:border-accent focus:outline-none transition-colors duration-300 appearance-none cursor-pointer"
-                  >
-                    <option value="" class="bg-stone-900">Select scope</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label for="ct-message" class="block text-[11px] font-semibold uppercase tracking-[0.2em] text-stone-500 mb-3">
-                  Tell Us About Your Project *
-                </label>
-                <textarea
-                  id="ct-message"
-                  name="message"
-                  required
-                  rows="5"
-                  class="w-full bg-transparent border-b border-stone-700 pb-3 text-base text-white placeholder-stone-600 focus:border-accent focus:outline-none transition-colors duration-300 resize-none"
-                  placeholder="Describe your project, timeline, and any specific requirements..."
-                ></textarea>
-              </div>
-
-              <div class="flex items-start gap-3">
-                <input
-                  type="checkbox"
-                  id="ct-constructionEstimate"
-                  name="constructionEstimate"
-                  value="yes"
-                  class="mt-1 h-4 w-4 shrink-0 rounded border-stone-600 bg-stone-950/50 text-accent focus:ring-2 focus:ring-accent/40 focus:ring-offset-0 focus:ring-offset-transparent accent-accent"
-                />
-                <label for="ct-constructionEstimate" class="text-base text-stone-400 leading-snug cursor-pointer">
-                  Get a complete construction estimate?
-                </label>
-              </div>
-
-              <div id="ct-form-error" class="hidden text-red-400 text-sm"></div>
-
-              <div class="pt-4">
-                <button
-                  type="submit"
-                  id="ct-submit-btn"
-                  class="group inline-flex items-center gap-3 bg-white text-stone-950 px-10 py-4 text-[12px] font-semibold uppercase tracking-[0.15em] transition-all duration-300 hover:bg-stone-200 w-full md:w-auto justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <span id="ct-btn-text">Send Message</span>
-                  <svg id="ct-btn-arrow" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                  <svg id="ct-btn-spinner" class="hidden w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
-                </button>
-              </div>
-            </form>
-
-            <div id="ct-form-success" class="hidden py-12 text-center">
-              <div class="inline-flex items-center justify-center w-16 h-16 rounded-full border border-accent/30 mb-6">
-                <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" /></svg>
-              </div>
-              <h3 class="font-[Playfair_Display] text-2xl text-white mb-2">Message Sent</h3>
-              <p class="text-stone-400">Thank you for reaching out. We'll be in touch within 24 hours.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div>
+      <label for="ct-email">Email *</label>
+      <input type="email" id="ct-email" name="email" required autocomplete="email" />
     </div>
-  </section>
+
+    <div>
+      <label for="ct-phone">Phone</label>
+      <input type="tel" id="ct-phone" name="phone" autocomplete="tel" />
+    </div>
+
+    <div>
+      <label for="ct-address">Address</label>
+      <input type="text" id="ct-address" name="address" autocomplete="street-address" />
+    </div>
+
+    <div>
+      <label for="ct-projectType">Type</label>
+      <select id="ct-projectType" name="projectType">
+        <option value="">Select type</option>
+        <option value="residential">Residential</option>
+        <option value="commercial">Commercial</option>
+      </select>
+    </div>
+
+    <div id="ct-subcategory-wrap" class="opacity-0 max-h-0 overflow-hidden pointer-events-none">
+      <label for="ct-subcategory">Scope</label>
+      <select id="ct-subcategory" name="subcategory">
+        <option value="">Select scope</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="ct-message">Message *</label>
+      <textarea id="ct-message" name="message" required rows="5"></textarea>
+    </div>
+
+    <div>
+      <input type="checkbox" id="ct-constructionEstimate" name="constructionEstimate" value="yes" />
+      <label for="ct-constructionEstimate">Request estimate?</label>
+    </div>
+
+    <div id="ct-form-error" class="hidden"></div>
+
+    <button type="submit" id="ct-submit-btn">
+      <span id="ct-btn-text">Send</span>
+      <span id="ct-btn-arrow">&rarr;</span>
+      <span id="ct-btn-spinner" class="hidden">...</span>
+    </button>
+  </form>
+
+  <div id="ct-form-success" class="hidden">
+    <p>Message sent.</p>
+  </div>
 </Layout>
 
 <script>
