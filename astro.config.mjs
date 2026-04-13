@@ -6,4 +6,8 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  /** `/items/*` → `/menu/*` is handled in `public/_redirects` (Cloudflare Pages). */
+  redirects: {
+    "/items": "/menu",
+  },
 });

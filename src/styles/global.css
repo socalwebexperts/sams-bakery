@@ -52,4 +52,12 @@
     background-color: var(--color-primary);
     color: #ffffff;
   }
+
+  body:has(#mobile-nav-details[open]) {
+    overflow: hidden;
+  }
+
+  #mobile-nav-details > summary {
+    list-style: none;
+  }
 }

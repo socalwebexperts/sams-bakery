@@ -23,9 +23,9 @@ Bare Astro 6 skeleton with Tailwind CSS 4, Cloudflare Pages, and a Resend-powere
 ```
 ├── AI-GUIDE.md
 ├── templates/
-│   └── content-entry.md     ← Example CMS entry — copy into src/content/items/
+│   └── content-entry.md     ← Example CMS entry — copy into src/content/menu/
 ├── .pages.yml               ← CMS field definitions for external tooling
-├── astro.config.mjs         ← Vite + Tailwind plugin
+├── astro.config.mjs         ← Vite + Tailwind + redirects (e.g. /items → /menu)
 ├── wrangler.jsonc            ← Cloudflare Pages config + env vars
 ├── package.json
 ├── tsconfig.json
@@ -36,6 +36,7 @@ Bare Astro 6 skeleton with Tailwind CSS 4, Cloudflare Pages, and a Resend-powere
 │       └── contact.ts        ← POST /api/contact → Resend email
 │
 ├── public/
+│   ├── _redirects             ← Cloudflare Pages: legacy /items/* → /menu/*
 │   ├── favicon.svg
 │   └── media/
 │       └── uploads/          ← Content images go here (/media/uploads/*)
@@ -43,16 +44,15 @@ Bare Astro 6 skeleton with Tailwind CSS 4, Cloudflare Pages, and a Resend-powere
 └── src/
     ├── content.config.ts     ← Content collection schema (Zod + glob loader)
     ├── content/
-    │   └── items/            ← Markdown CMS entries go here
+    │   └── menu/             ← Pagers CMS: menu item markdown (see .pages.yml)
     │
     ├── data/
     │   ├── site.ts           ← Site name, nav links, contact info
-    │   └── items.ts          ← CMS query helpers (getItems, getItemBySlug)
+    │   └── menu.ts           ← Menu CMS helpers (grouped, featured, A–Z)
     │
     ├── components/
     │   ├── Navigation.astro  ← Bare nav (data-driven from site.ts)
-    │   ├── Footer.astro      ← Bare footer (data-driven from site.ts)
-    │   └── ItemListing.astro ← Simple list of CMS items with links
+    │   └── Footer.astro      ← Bare footer (data-driven from site.ts)
     │
     ├── layouts/
     │   └── Layout.astro      ← HTML shell: <head>, Navigation, <slot/>, Footer
@@ -61,9 +61,9 @@ Bare Astro 6 skeleton with Tailwind CSS 4, Cloudflare Pages, and a Resend-powere
     │   ├── index.astro       ← Home (empty)
     │   ├── about.astro       ← About (empty)
     │   ├── contact.astro     ← Contact form (functional)
-    │   └── items/
-    │       ├── index.astro   ← CMS listing page
-    │       └── [slug].astro  ← Dynamic CMS detail page
+    │   └── menu/
+    │       ├── index.astro   ← /menu — full menu + highlights (from CMS)
+    │       └── [slug].astro  ← /menu/:slug — item detail
     │
     ├── scripts/
     │   └── contact-form.ts   ← setupFormLogic(prefix) — form submission + UI states
@@ -88,31 +88,21 @@ Single source for site-wide strings. Update these first for any new project.
 
 ### Schema: `src/content.config.ts`
 
-The `items` collection uses a glob loader on `src/content/items/**/*.md`. Current schema has only `title`. Extend it by adding fields to the Zod schema:
-
-```ts
-schema: z.object({
-  title: z.string(),
-  // Add your fields here, e.g.:
-  // description: z.string().optional(),
-  // image: z.string().optional(),
-  // category: z.enum(["type-a", "type-b"]),
-})
-```
-
-Then update the `ContentItem` interface in `src/data/items.ts` to match, and update the CMS field definitions in `.pages.yml`.
+The **`menu`** collection loads `src/content/menu/**/*.md`. Fields include `title`, `slug`, `description`, `price`, `category`, `sortOrder`, `featured`, `featuredOrder`, `image` — see Zod schema in `content.config.ts` and `.pages.yml`.
 
 ### Adding content
 
-1. Copy `templates/content-entry.md` into `src/content/items/` and rename it
-2. The filename (minus `.md`) becomes the URL slug: `/items/my-item`
-3. Place images in `public/media/uploads/`
+1. Copy `templates/content-entry.md` into `src/content/menu/` as `{slug}.md` (filename must match the `slug` field).
+2. Public URLs: **`/menu`** (full menu), **`/menu/{slug}`** (detail).
+3. **Images:** Pagers bucket `uploads` writes to `public/media/uploads/` (site URL `/media/uploads/*`). Set `image: "/media/uploads/your-file.webp"` on menu items, or use a full `https://` URL.
 
-### Data helpers: `src/data/items.ts`
+### Data helpers: `src/data/menu.ts`
 
-- **`getItems()`** — Returns all entries sorted by slug
-- **`getItemBySlug(slug)`** — Finds a single entry
-- **`ContentItem`** — Interface matching the schema (`{ slug, title }`)
+- **`getMenuGroupedByCategory()`** — Sections for `/menu`
+- **`getFeaturedMenuItems()`** — Home + menu highlights
+- **`getAllMenuItemsAlphabetically()`** — A–Z list if needed
+- **`getMenuItemViewBySlug(slug)`** — Lookup by slug
+- **`MenuItemView`** — Shape used in pages
 
 ### CMS config: `.pages.yml`
 
@@ -228,12 +218,12 @@ RESEND_API_KEY=re_your_key_here
 2. **`wrangler.jsonc`** — Set `name`, `CLIENT_NAME`, `NOTIFICATION_EMAIL`
 3. **`package.json`** — Set `name` and `--project-name` in deploy script
 4. **Add fonts** — Add `<link>` tags to `Layout.astro` `<head>`
-5. **Extend CMS schema** — Add fields to `content.config.ts`, `items.ts`, and `.pages.yml`
-6. **Rename routes** — Rename `src/pages/items/` to match your content (e.g., `portfolio/`, `menu/`)
+5. **Extend CMS schema** — Add fields to `content.config.ts`, `menu.ts`, and `.pages.yml`
+6. **Menu routes** — Use `src/pages/menu/` (`index` + `[slug]`) with content in `src/content/menu/`
 7. **Design pages** — Build `index.astro`, `about.astro`, etc.
 8. **Design nav + footer** — Style `Navigation.astro` and `Footer.astro`
 9. **Style contact form** — Add Tailwind classes to `contact.astro`
-10. **Style listing + detail** — Design `ItemListing.astro` and `[slug].astro`
+10. **Style listing + detail** — Design `src/pages/menu/index.astro` and `src/pages/menu/[slug].astro`
 11. **Add content** — Copy `templates/content-entry.md`, place images in `public/media/uploads/`
 12. **Set Resend key** — `wrangler secret put RESEND_API_KEY`
 13. **Update sender domain** — Change `from` in `functions/api/contact.ts` to your verified domain

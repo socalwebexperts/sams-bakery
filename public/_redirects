@@ -1,0 +1,3 @@
+# Legacy URLs → unified /menu routes (Cloudflare Pages)
+/items /menu 301
+/items/* /menu/:splat 301

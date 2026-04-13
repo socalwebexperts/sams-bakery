@@ -1,0 +1,120 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getMenuGroupedByCategory, getFeaturedMenuItems } from "../../data/menu";
+
+const grouped = await getMenuGroupedByCategory();
+const featured = await getFeaturedMenuItems();
+---
+
+<Layout title="Menu">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="bg-cream py-16 lg:py-20">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h1 class="font-serif text-4xl lg:text-5xl text-stone-900 mb-4">Our Menu</h1>
+      <p class="text-stone-500 text-lg leading-relaxed">
+        Every item is handcrafted daily with traditional Armenian recipes and the finest ingredients.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ FEATURED ITEMS GRID ═══ -->
+  <section class="py-12 lg:py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-end justify-between mb-10 lg:mb-14">
+        <div>
+          <p class="text-xs tracking-[0.2em] uppercase text-primary font-medium mb-2">Fresh Daily</p>
+          <h2 class="font-serif text-3xl lg:text-4xl text-stone-900">Highlights</h2>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-16 lg:mb-24">
+        {featured.map((item) => (
+          <a href={`/menu/${item.slug}`} class="group block">
+            <div class="aspect-square bg-gradient-to-br from-amber-50 to-orange-50 mb-4 overflow-hidden flex items-center justify-center">
+              {item.image ? (
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="text-center p-4 transition-transform duration-500 group-hover:scale-105">
+                  <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-primary/5 flex items-center justify-center">
+                    <svg class="w-8 h-8 text-primary/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
+                    </svg>
+                  </div>
+                  <p class="text-xs text-stone-400 tracking-wider uppercase">Add image in CMS</p>
+                </div>
+              )}
+            </div>
+            <div class="flex items-start justify-between gap-2">
+              <h3 class="font-serif text-lg text-stone-900 group-hover:text-primary transition-colors">{item.title}</h3>
+              {item.price && (
+                <span class="text-sm font-medium text-primary shrink-0 tabular-nums">{item.price}</span>
+              )}
+            </div>
+            {item.description ? <p class="text-sm text-stone-500 mt-1">{item.description}</p> : null}
+          </a>
+        ))}
+      </div>
+
+      <!-- ═══ FULL MENU LIST ═══ -->
+      {grouped.map((category) => (
+        <div class="mb-16 last:mb-0">
+          <div class="flex items-center gap-4 mb-8">
+            <h2 class="font-serif text-2xl lg:text-3xl text-stone-900 shrink-0">{category.name}</h2>
+            <div class="h-px bg-stone-200 flex-1"></div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
+            {category.items.map((item) => (
+              <div class="flex gap-4 group py-3 border-b border-stone-100">
+                <a
+                  href={`/menu/${item.slug}`}
+                  class="w-16 h-16 shrink-0 bg-gradient-to-br from-amber-50 to-orange-50 flex items-center justify-center hover:ring-2 hover:ring-primary/20 transition-shadow"
+                  aria-hidden="true"
+                  tabindex="-1"
+                >
+                  <svg class="w-6 h-6 text-primary/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
+                  </svg>
+                </a>
+                <div class="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-4">
+                  <div>
+                    <h3 class="font-serif text-lg">
+                      <a href={`/menu/${item.slug}`} class="text-stone-900 hover:text-primary transition-colors">
+                        {item.title}
+                      </a>
+                    </h3>
+                    {item.description ? (
+                      <p class="text-sm text-stone-500 mt-0.5 leading-relaxed">{item.description}</p>
+                    ) : null}
+                  </div>
+                  <span class="text-base font-medium text-stone-900 tabular-nums shrink-0 sm:pt-0.5">{item.price}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═══ -->
+  <section class="bg-primary py-14 lg:py-16">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="font-serif text-2xl lg:text-3xl text-white mb-3">Looking for Something Special?</h2>
+      <p class="text-white/70 mb-6">We take custom orders for celebrations, holidays, and events of all sizes.</p>
+      <a
+        href="/contact"
+        class="inline-flex items-center justify-center px-8 py-3.5 bg-white text-primary text-sm tracking-[0.12em] uppercase font-medium hover:bg-cream transition-colors"
+      >
+        Place a Custom Order
+      </a>
+    </div>
+  </section>
+
+</Layout>

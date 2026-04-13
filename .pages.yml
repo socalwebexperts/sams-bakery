@@ -1,6 +1,8 @@
+# Sam's Armenian Bakery — Pagers CMS (keep in sync with src/content.config.ts)
+# Menu “Featured image” uses this bucket; files on disk: public/media/uploads → URL path /media/uploads/...
 media:
   - name: uploads
-    label: Uploads
+    label: Menu & site uploads
     input: public/media/uploads
     output: /media/uploads
     categories: [image]
@@ -8,33 +10,93 @@ media:
     extensions: [jpg, jpeg, png, webp, gif]
 
 content:
-  - name: items
-    label: Items
+  - name: menu
+    label: Menu items
     type: collection
-    path: src/content/items
+    path: src/content/menu
     format: yaml-frontmatter
     filename:
-      template: "{primary}.md"
-      field: false
+      template: "{slug}.md"
+      field: slug
     view:
       primary: title
-      fields: [title]
+      fields: [title, category, price, featured, featuredOrder, sortOrder, image]
       sort:
-        field: title
+        field: sortOrder
         direction: asc
     fields:
       - name: title
-        label: Title
+        label: Item name
         type: string
         required: true
         options:
+          maxlength: 200
+      - name: slug
+        label: URL slug
+        type: string
+        required: true
+        hint: "Lowercase with hyphens (e.g. gata, pelmeni-beef). Must match the filename."
+        options:
           maxlength: 120
+          pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      - name: description
+        label: Description
+        type: string
+        required: false
+        options:
+          maxlength: 500
+      - name: price
+        label: Price
+        type: string
+        required: true
+        hint: "Examples — $2.50  |  $10.50 / lb  |  $2.00 each"
+        options:
+          maxlength: 40
+      - name: category
+        label: Menu section
+        type: select
+        required: true
+        options:
+          - value: "Frozen food"
+            label: Frozen food
+          - value: "Pastry"
+            label: Pastry
+          - value: "Boreks"
+            label: Boreks
+          - value: "Hot food"
+            label: Hot food
+          - value: "Drinks"
+            label: Drinks
+      - name: sortOrder
+        label: Sort order
+        type: number
+        required: false
+        hint: "Within this section only — lower numbers appear first."
+      - name: featured
+        label: Featured on home & menu highlights
+        type: boolean
+        required: false
+        hint: "When enabled, this item appears in “What Our Customers LOVE!” and the menu Highlights grid."
+      - name: featuredOrder
+        label: Featured order
+        type: number
+        required: false
+        hint: "Order in the home/menu highlight sections only (1 = first). Leave empty for non-featured items."
+      # If your tooling errors on `type: image`, use `type: string` and keep the hint (uploads still land in public/media/uploads).
+      - name: image
+        label: Featured image
+        type: image
+        media: uploads
+        required: false
+        hint: "Upload a JPG/PNG/WebP here (saved to public/media/uploads). Or type a path like /media/uploads/your-file.webp. Shown when Featured is on."
+        options:
+          maxlength: 500
 
 settings:
   content:
     merge: true
   commit:
     templates:
-      create: "content: add {filename}"
-      update: "content: update {filename}"
-      delete: "content: remove {filename}"
+      create: "content: add menu item {filename}"
+      update: "content: update menu item {filename}"
+      delete: "content: remove menu item {filename}"
