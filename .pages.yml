@@ -41,21 +41,19 @@ content:
         hint: "Examples — $2.50  |  $10.50 / lb  |  $2.00 each"
         options:
           maxlength: 40
+      # Pages CMS select: use options.values (see https://pagescms.org/docs/configuration/fields/select/)
       - name: category
         label: Menu section
         type: select
         required: true
         options:
-          - value: "Frozen food"
-            label: Frozen food
-          - value: "Pastry"
-            label: Pastry
-          - value: "Boreks"
-            label: Boreks
-          - value: "Hot food"
-            label: Hot food
-          - value: "Drinks"
-            label: Drinks
+          values:
+            - "Frozen food"
+            - Pastry
+            - Boreks
+            - "Hot food"
+            - Drinks
+          placeholder: "Select a section"
       # If `type: image` errors in your Pagers build, use type: string (same hint).
       - name: image
         label: Image
