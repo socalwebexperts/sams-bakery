@@ -1,8 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getFeaturedMenuItems } from "../data/menu";
-
-const featured = await getFeaturedMenuItems();
+import { HOME_LOVE_ITEMS } from "../data/home-loves";
 ---
 
 <Layout title="Home">
@@ -86,7 +84,7 @@ const featured = await getFeaturedMenuItems();
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {featured.map((item) => (
+        {HOME_LOVE_ITEMS.map((item) => (
           <a href={`/menu/${item.slug}`} class="group block">
             <div class="aspect-square mb-4 overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50">
               {item.image ? (

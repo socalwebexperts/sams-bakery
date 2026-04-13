@@ -1,17 +1,12 @@
 ---
-# Copy into src/content/menu/ as {slug}.md — filename must match `slug`.
-# Pagers: “Menu items” + media bucket “uploads” → public/media/uploads
+# Save as src/content/menu/your-file-name.md (URL: /menu/your-file-name)
+# Pagers: item name drives the filename; fields below only (no slug/sort/featured).
 
-title: "Example item name"
-slug: "example-item"
-description: "Short description for the menu list and featured cards."
+title: "Example item"
+description: "Optional short description for the menu list."
 price: "$0.00"
 category: "Pastry"
-sortOrder: 10
-featured: false
-# featuredOrder: 1
-# Upload via CMS, then set e.g.:
-# image: /media/uploads/example-item.webp
+# image: "/media/uploads/example.webp"
 ---
 
-Optional markdown **body** for `/menu/example-item`.
+Optional markdown body for `/menu/example-file-name`.

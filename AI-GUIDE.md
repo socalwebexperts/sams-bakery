@@ -88,7 +88,7 @@ Single source for site-wide strings. Update these first for any new project.
 
 ### Schema: `src/content.config.ts`
 
-The **`menu`** collection loads `src/content/menu/**/*.md`. Fields include `title`, `slug`, `description`, `price`, `category`, `sortOrder`, `featured`, `featuredOrder`, `image` — see Zod schema in `content.config.ts` and `.pages.yml`.
+The **`menu`** collection loads `src/content/menu/**/*.md`. Fields: `title`, `description`, `price`, `category`, optional `image`. URL slug comes from the **filename** only (`gata.md` → `/menu/gata`). Within each section, items are sorted **alphabetically by title**. Home “What Our Customers LOVE!” is **static** in `src/data/home-loves.ts` (not CMS).
 
 ### Adding content
 
@@ -98,11 +98,12 @@ The **`menu`** collection loads `src/content/menu/**/*.md`. Fields include `titl
 
 ### Data helpers: `src/data/menu.ts`
 
-- **`getMenuGroupedByCategory()`** — Sections for `/menu`
-- **`getFeaturedMenuItems()`** — Home + menu highlights
-- **`getAllMenuItemsAlphabetically()`** — A–Z list if needed
-- **`getMenuItemViewBySlug(slug)`** — Lookup by slug
+- **`getMenuGroupedByCategory()`** — Sections for `/menu` (sorted A–Z by title within each category)
+- **`getAllMenuItemsAlphabetically()`** — A–Z across all items
+- **`getMenuItemViewBySlug(slug)`** — Lookup by filename slug
 - **`MenuItemView`** — Shape used in pages
+
+Home page favorites: **`src/data/home-loves.ts`** (edit copy/images there; links to `/menu/{slug}`).
 
 ### CMS config: `.pages.yml`
 

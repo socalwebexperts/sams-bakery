@@ -1,5 +1,5 @@
 # Sam's Armenian Bakery — Pagers CMS (keep in sync with src/content.config.ts)
-# Menu “Featured image” uses this bucket; files on disk: public/media/uploads → URL path /media/uploads/...
+# Uploads: public/media/uploads → site URL /media/uploads/...
 media:
   - name: uploads
     label: Menu & site uploads
@@ -16,14 +16,11 @@ content:
     path: src/content/menu
     format: yaml-frontmatter
     filename:
-      template: "{slug}.md"
-      field: slug
+      template: "{primary}.md"
+      primary: title
     view:
       primary: title
-      fields: [title, category, price, featured, featuredOrder, sortOrder, image]
-      sort:
-        field: sortOrder
-        direction: asc
+      fields: [title, category, price, image]
     fields:
       - name: title
         label: Item name
@@ -31,14 +28,6 @@ content:
         required: true
         options:
           maxlength: 200
-      - name: slug
-        label: URL slug
-        type: string
-        required: true
-        hint: "Lowercase with hyphens (e.g. gata, pelmeni-beef). Must match the filename."
-        options:
-          maxlength: 120
-          pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
       - name: description
         label: Description
         type: string
@@ -67,28 +56,13 @@ content:
             label: Hot food
           - value: "Drinks"
             label: Drinks
-      - name: sortOrder
-        label: Sort order
-        type: number
-        required: false
-        hint: "Within this section only — lower numbers appear first."
-      - name: featured
-        label: Featured on home & menu highlights
-        type: boolean
-        required: false
-        hint: "When enabled, this item appears in “What Our Customers LOVE!” and the menu Highlights grid."
-      - name: featuredOrder
-        label: Featured order
-        type: number
-        required: false
-        hint: "Order in the home/menu highlight sections only (1 = first). Leave empty for non-featured items."
-      # If your tooling errors on `type: image`, use `type: string` and keep the hint (uploads still land in public/media/uploads).
+      # If `type: image` errors in your Pagers build, use type: string (same hint).
       - name: image
-        label: Featured image
+        label: Image
         type: image
         media: uploads
         required: false
-        hint: "Upload a JPG/PNG/WebP here (saved to public/media/uploads). Or type a path like /media/uploads/your-file.webp. Shown when Featured is on."
+        hint: "Optional. One image per item, saved under public/media/uploads (use /media/uploads/filename.ext)."
         options:
           maxlength: 500
 
