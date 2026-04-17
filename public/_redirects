@@ -1,5 +1,5 @@
 # Legacy URLs → unified menu (Cloudflare Pages)
 /items /menu 301
 /items/* /menu 301
-# Old per-item URLs (detail pages removed)
-/menu/* /menu 301
+# Note: Do not add `/menu/* → /menu` here — it matches `/menu/` and conflicts with
+# trailing-slash canonicalization, causing an infinite redirect loop on /menu.

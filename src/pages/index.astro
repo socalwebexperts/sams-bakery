@@ -36,7 +36,7 @@ import { HOME_LOVE_ITEMS } from "../data/home-loves";
           <div class="relative aspect-[4/3] lg:aspect-auto lg:h-[600px] xl:h-[650px] overflow-hidden">
             <img
               src="/media/uploads/home-hero.jpg"
-              alt="Powdered pastries at the counter — inside Sam's bakery"
+              alt="Pastry case with powdered treats and sweet breads at Sam's Armenian Bakery in Glendale"
               class="w-full h-full object-cover"
               loading="eager"
               decoding="async"
@@ -103,7 +103,7 @@ import { HOME_LOVE_ITEMS } from "../data/home-loves";
             <div class="aspect-square mb-4 overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50 rounded-sm">
               <img
                 src={item.image}
-                alt={item.title}
+                alt={`Photo of ${item.title}: ${item.description} — customer favorite at Sam's Armenian Bakery`}
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
               />
@@ -135,7 +135,7 @@ import { HOME_LOVE_ITEMS } from "../data/home-loves";
           <div class="relative z-10 w-[80%] max-w-md">
             <img
               src="https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=700&h=560&fit=crop"
-              alt="Baker pulling fresh bread from a stone oven"
+              alt="Baker using a peel to pull golden loaves from a hot stone oven"
               class="angled-photo-left w-full shadow-2xl"
               loading="lazy"
             />
@@ -182,7 +182,7 @@ import { HOME_LOVE_ITEMS } from "../data/home-loves";
           <div class="relative z-10 w-[80%] max-w-md">
             <img
               src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=700&h=560&fit=crop"
-              alt="Assorted pastries beautifully arranged on a platter"
+              alt="Close-up of assorted pastries and viennoiserie arranged on a serving platter"
               class="angled-photo-right w-full shadow-2xl"
               loading="lazy"
             />
@@ -206,6 +206,8 @@ import { HOME_LOVE_ITEMS } from "../data/home-loves";
             link: "/catering",
             cta: "Learn More",
             img: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=600&h=450&fit=crop",
+            imageAlt:
+              "Table spread with wine, small plates, and appetizers for a catered event",
           },
           {
             title: "Custom Orders",
@@ -213,6 +215,8 @@ import { HOME_LOVE_ITEMS } from "../data/home-loves";
             link: "/contact",
             cta: "Inquire Now",
             img: "https://images.unsplash.com/photo-1517686469429-8bdb88b9f907?w=600&h=450&fit=crop",
+            imageAlt:
+              "Layered celebration cake and desserts for birthdays and special orders",
           },
           {
             title: "Events",
@@ -220,13 +224,15 @@ import { HOME_LOVE_ITEMS } from "../data/home-loves";
             link: "/contact",
             cta: "Get in Touch",
             img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=450&fit=crop",
+            imageAlt:
+              "Warm restaurant dining room set for a group celebration or event",
           },
         ].map((item) => (
           <div class="group bg-white overflow-hidden">
             <div class="aspect-[4/3] overflow-hidden">
               <img
                 src={item.img}
-                alt={item.title}
+                alt={item.imageAlt}
                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"
               />
@@ -293,7 +299,7 @@ import { HOME_LOVE_ITEMS } from "../data/home-loves";
         <div class="aspect-[4/3] lg:aspect-auto lg:h-[560px] overflow-hidden">
           <img
             src="https://images.unsplash.com/photo-1517433367423-c7e5b0f35086?w=800&h=600&fit=crop"
-            alt="Inside the bakery — fresh loaves and pastries"
+            alt="Wooden shelves lined with fresh loaves, baskets, and baked goods in a bright bakery interior"
             class="w-full h-full object-cover"
             loading="lazy"
           />

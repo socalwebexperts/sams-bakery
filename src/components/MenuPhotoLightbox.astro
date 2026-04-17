@@ -23,7 +23,11 @@
     </button>
 
     <div class="mt-12 w-full flex flex-col items-center sm:mt-10">
-      <img data-lightbox-img src="" alt="" class="max-h-[min(78vh,900px)] w-auto max-w-full rounded-sm object-contain shadow-2xl" />
+      <img
+        data-lightbox-img
+        alt="Enlarged photo of the selected menu item"
+        class="max-h-[min(78vh,900px)] w-auto max-w-full rounded-sm object-contain shadow-2xl"
+      />
 
       <div class="mt-4 max-w-lg text-center">
         <p id="menu-photo-lightbox-title" data-lightbox-caption class="font-serif text-lg text-white sm:text-xl"></p>
@@ -82,7 +86,7 @@
 
     dialog.addEventListener("close", function () {
       img.removeAttribute("src");
-      img.setAttribute("alt", "");
+      img.setAttribute("alt", "Enlarged photo of the selected menu item");
     });
 
     document.body.addEventListener("click", function (e) {

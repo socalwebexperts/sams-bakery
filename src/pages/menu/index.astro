@@ -44,7 +44,16 @@ const grouped = await getMenuGroupedByCategory();
                       class="w-16 h-16 shrink-0 bg-gradient-to-br from-amber-50 to-orange-50 flex items-center justify-center overflow-hidden ring-1 ring-transparent transition-shadow group-hover:ring-primary/20"
                       aria-hidden="true"
                     >
-                      <img src={item.image} alt="" class="w-full h-full object-cover" loading="lazy" />
+                      <img
+                        src={item.image}
+                        alt={
+                          item.description
+                            ? `Photo of ${item.title}: ${item.description}`
+                            : `Photo of ${item.title} — Sam's Armenian Bakery menu`
+                        }
+                        class="w-full h-full object-cover"
+                        loading="lazy"
+                      />
                     </span>
                     <div class="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-4">
                       <div>
