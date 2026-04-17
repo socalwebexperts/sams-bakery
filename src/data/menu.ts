@@ -2,10 +2,10 @@ import { getCollection, type CollectionEntry } from "astro:content";
 
 /** Display order of sections on /menu */
 export const MENU_CATEGORY_ORDER = [
-  "Frozen food",
   "Pastry",
   "Boreks",
   "Hot food",
+  "Frozen food",
   "Drinks",
 ] as const;
 

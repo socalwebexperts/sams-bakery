@@ -1,0 +1,91 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { CONTACT_INFO, SITE } from "../data/site";
+---
+
+<Layout
+  title="Accessibility"
+  description={`Accessibility statement for ${SITE.name} — our commitment to an inclusive website and welcoming bakery in Glendale, CA.`}
+>
+  <section class="bg-cream py-16 lg:py-20">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h1 class="font-serif text-4xl lg:text-5xl text-stone-900 mb-4">Accessibility</h1>
+      <p class="text-stone-500 text-lg leading-relaxed">
+        We want everyone who visits our website or our bakery to feel welcome and able to use our services.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-3xl mx-auto px-4">
+      <p class="text-xs text-stone-400 mb-10">Last updated: April 2026</p>
+
+      <div class="space-y-10 text-stone-600 leading-relaxed">
+        <div>
+          <h2 class="font-serif text-2xl text-stone-900 mb-4">Our commitment</h2>
+          <p>
+            {SITE.name} is committed to making our website and physical location accessible to people of all abilities.
+            We aim to follow generally recognized guidelines for web accessibility and to provide reasonable assistance
+            when you visit us in person.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-2xl text-stone-900 mb-4">Website</h2>
+          <p class="mb-4">
+            We work to structure our site with clear headings, readable text, and descriptive labels where we can, so
+            that visitors using keyboards, screen readers, or other assistive technologies can navigate more easily.
+            Some third-party content we embed (for example, maps) is controlled by those providers and may not meet the
+            same standards; we choose common, widely used services to limit barriers when possible.
+          </p>
+          <p>
+            Web accessibility is an ongoing effort. As we update our pages, we try to improve usability and fix issues
+            we become aware of.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-2xl text-stone-900 mb-4">Visit us in person</h2>
+          <p class="mb-4">
+            If you need help placing an order, reading the menu, or carrying items to your vehicle, please ask a member
+            of our team during business hours. We will do our best to accommodate reasonable requests.
+          </p>
+          <p>
+            Our bakery is located at{" "}
+            <span class="text-stone-800">{CONTACT_INFO.location}</span>. If you have questions before your visit, you
+            can reach us at{" "}
+            <a href={CONTACT_INFO.phoneHref} class="text-primary hover:text-primary-dark underline underline-offset-2">
+              {CONTACT_INFO.phone}
+            </a>{" "}
+            or{" "}
+            <a href={`mailto:${CONTACT_INFO.email}`} class="text-primary hover:text-primary-dark underline underline-offset-2">
+              {CONTACT_INFO.email}
+            </a>.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-2xl text-stone-900 mb-4">Feedback</h2>
+          <p>
+            If you encounter an accessibility barrier on this website or at our bakery, please let us know. We take
+            feedback seriously and will consider it as we make improvements. Contact us at{" "}
+            <a href={`mailto:${CONTACT_INFO.email}`} class="text-primary hover:text-primary-dark underline underline-offset-2">
+              {CONTACT_INFO.email}
+            </a>{" "}
+            or through our{" "}
+            <a href="/contact" class="text-primary hover:text-primary-dark underline underline-offset-2">Contact</a>{" "}
+            page and describe the issue as best you can (for example, which page or feature was difficult to use).
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-2xl text-stone-900 mb-4">Limitations</h2>
+          <p>
+            Despite our efforts, some areas of the site may not yet be fully accessible to every user. Technology and
+            standards change over time; we appreciate your patience as we continue to learn and update our content.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

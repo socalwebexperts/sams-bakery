@@ -1,0 +1,162 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { CONTACT_INFO, SITE } from "../data/site";
+---
+
+<Layout
+  title="Privacy Policy"
+  description={`Privacy policy for ${SITE.name} — how we collect, use, and protect information when you use our website or contact us.`}
+>
+  <section class="bg-cream py-16 lg:py-20">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h1 class="font-serif text-4xl lg:text-5xl text-stone-900 mb-4">Privacy Policy</h1>
+      <p class="text-stone-500 text-lg leading-relaxed">
+        How we handle information when you browse our site, send us a message, or interact with {SITE.name}.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-3xl mx-auto px-4">
+      <p class="text-xs text-stone-400 mb-10">Last updated: April 2026</p>
+
+      <div class="space-y-10 text-stone-600 leading-relaxed">
+        <div>
+          <h2 class="font-serif text-2xl text-stone-900 mb-4">Introduction</h2>
+          <p>
+            This Privacy Policy describes how {SITE.name} (“we,” “us,” or “our”) collects, uses, and shares information
+            in connection with our website and related communications. By using our website, you agree to this policy. If
+            you do not agree, please discontinue use of the site.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-2xl text-stone-900 mb-4">Information we collect</h2>
+          <p class="mb-4">We may collect the following types of information:</p>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>
+              <strong class="text-stone-800 font-medium">Information you provide.</strong> When you contact us (for
+              example through our contact form or by email), we receive whatever details you choose to send, such as
+              your name, email address, phone number, and the content of your message.
+            </li>
+            <li>
+              <strong class="text-stone-800 font-medium">Technical data.</strong> Like many websites, our hosting and
+              infrastructure may automatically log basic technical information such as your browser type, general
+              location (e.g., region), referring page, and the date and time of requests. This helps us operate and
+              secure the site.
+            </li>
+            <li>
+              <strong class="text-stone-800 font-medium">Cookies and similar technologies.</strong> We may use
+              cookies or similar tools that are necessary for the site to function, or that help us understand how the
+              site is used in aggregate. You can control cookies through your browser settings.
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-2xl text-stone-900 mb-4">How we use information</h2>
+          <p class="mb-4">We use the information we collect to:</p>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Respond to your inquiries and provide customer service;</li>
+            <li>Process or discuss orders, catering requests, or other business you initiate with us;</li>
+            <li>Operate, maintain, and improve our website and services;</li>
+            <li>Detect and help prevent fraud, abuse, or security issues;</li>
+            <li>Comply with applicable law and enforce our rights.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-2xl text-stone-900 mb-4">Sharing of information</h2>
+          <p class="mb-4">
+            We do not sell your personal information. We may share information only in these situations:
+          </p>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>
+              <strong class="text-stone-800 font-medium">Service providers.</strong> We may use trusted vendors to host
+              our website, send email, analyze traffic, or provide similar services. They may process information only
+              as needed to perform work for us and are expected to protect it appropriately.
+            </li>
+            <li>
+              <strong class="text-stone-800 font-medium">Legal requirements.</strong> We may disclose information if
+              required by law, court order, or government request, or to protect the rights, safety, or property of our
+              customers, our business, or others.
+            </li>
+            <li>
+              <strong class="text-stone-800 font-medium">Business transfers.</strong> If we are involved in a merger,
+              acquisition, or sale of assets, information may be transferred as part of that transaction, subject to
+              appropriate safeguards.
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-2xl text-stone-900 mb-4">Third-party links and embeds</h2>
+          <p>
+            Our site may include links to other websites or embedded content (such as maps). Those services have their
+            own privacy practices. We encourage you to read their policies; we are not responsible for their content or
+            practices.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-2xl text-stone-900 mb-4">California residents</h2>
+          <p>
+            If you are a California resident, you may have additional rights under the California Consumer Privacy Act
+            (CCPA), including the right to know what personal information we collect, to request deletion of certain
+            personal information, and to opt out of the “sale” of personal information (we do not sell personal
+            information as defined by the CCPA). To exercise these rights, contact us using the information below. We
+            will not discriminate against you for exercising your privacy rights.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-2xl text-stone-900 mb-4">Children’s privacy</h2>
+          <p>
+            Our website is not directed at children under 13, and we do not knowingly collect personal information from
+            children. If you believe we have collected information from a child, please contact us and we will take
+            appropriate steps to delete it.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-2xl text-stone-900 mb-4">Data security</h2>
+          <p>
+            We use reasonable administrative, technical, and physical safeguards designed to protect the information we
+            hold. No method of transmission over the internet is completely secure; we cannot guarantee absolute
+            security.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-2xl text-stone-900 mb-4">Retention</h2>
+          <p>
+            We retain information only as long as needed for the purposes described in this policy, unless a longer
+            period is required or permitted by law (for example, for tax or accounting records).
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-2xl text-stone-900 mb-4">Changes to this policy</h2>
+          <p>
+            We may update this Privacy Policy from time to time. The “Last updated” date at the top will change when we
+            do. Continued use of the site after changes means you accept the updated policy. We encourage you to review
+            this page periodically.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="font-serif text-2xl text-stone-900 mb-4">Contact us</h2>
+          <p>
+            For questions about this Privacy Policy or your information, contact {SITE.name} at{" "}
+            <a href={`mailto:${CONTACT_INFO.email}`} class="text-primary hover:text-primary-dark underline underline-offset-2">
+              {CONTACT_INFO.email}
+            </a>,{" "}
+            <a href={CONTACT_INFO.phoneHref} class="text-primary hover:text-primary-dark underline underline-offset-2">
+              {CONTACT_INFO.phone}
+            </a>, or write to us at {CONTACT_INFO.location}.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

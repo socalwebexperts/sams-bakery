@@ -48,10 +48,10 @@ content:
         required: true
         options:
           values:
-            - "Frozen food"
             - Pastry
             - Boreks
             - "Hot food"
+            - "Frozen food"
             - Drinks
           placeholder: "Select a section"
       # If `type: image` errors in your Pagers build, use type: string (same hint).

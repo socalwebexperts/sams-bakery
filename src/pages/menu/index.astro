@@ -30,33 +30,55 @@ const grouped = await getMenuGroupedByCategory();
           <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
             {category.items.map((item) => (
               <div class="flex gap-4 group py-3 border-b border-stone-100">
-                <a
-                  href={`/menu/${item.slug}`}
-                  class="w-16 h-16 shrink-0 bg-gradient-to-br from-amber-50 to-orange-50 flex items-center justify-center overflow-hidden hover:ring-2 hover:ring-primary/20 transition-shadow"
-                  aria-hidden="true"
-                  tabindex="-1"
-                >
-                  {item.image ? (
-                    <img src={item.image} alt="" class="w-full h-full object-cover" loading="lazy" />
-                  ) : (
-                    <svg class="w-6 h-6 text-primary/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
-                    </svg>
-                  )}
-                </a>
-                <div class="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-4">
-                  <div>
-                    <h3 class="font-serif text-lg">
-                      <a href={`/menu/${item.slug}`} class="text-stone-900 hover:text-primary transition-colors">
-                        {item.title}
-                      </a>
-                    </h3>
-                    {item.description ? (
-                      <p class="text-sm text-stone-500 mt-0.5 leading-relaxed">{item.description}</p>
-                    ) : null}
+                {item.image ? (
+                  <button
+                    type="button"
+                    class="flex w-full min-w-0 cursor-pointer gap-4 text-left transition-opacity hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                    data-menu-photo
+                    data-src={item.image}
+                    data-title={item.title}
+                    data-price={item.price}
+                    data-description={item.description ?? ""}
+                  >
+                    <span
+                      class="w-16 h-16 shrink-0 bg-gradient-to-br from-amber-50 to-orange-50 flex items-center justify-center overflow-hidden ring-1 ring-transparent transition-shadow group-hover:ring-primary/20"
+                      aria-hidden="true"
+                    >
+                      <img src={item.image} alt="" class="w-full h-full object-cover" loading="lazy" />
+                    </span>
+                    <div class="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-4">
+                      <div>
+                        <h3 class="font-serif text-lg text-stone-900 group-hover:text-primary transition-colors">
+                          {item.title}
+                        </h3>
+                        {item.description ? (
+                          <p class="text-sm text-stone-500 mt-0.5 leading-relaxed">{item.description}</p>
+                        ) : null}
+                      </div>
+                      <span class="text-base font-medium text-stone-900 tabular-nums shrink-0 sm:pt-0.5">{item.price}</span>
+                    </div>
+                  </button>
+                ) : (
+                  <div class="flex w-full gap-4">
+                    <span
+                      class="w-16 h-16 shrink-0 bg-gradient-to-br from-amber-50 to-orange-50 flex items-center justify-center overflow-hidden"
+                      aria-hidden="true"
+                    >
+                      <svg class="w-6 h-6 text-primary/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="0.75">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z" />
+                      </svg>
+                    </span>
+                    <div class="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 sm:gap-4">
+                      <div>
+                        <h3 class="font-serif text-lg text-stone-900">{item.title}</h3>
+                        {item.description ? (
+                          <p class="text-sm text-stone-500 mt-0.5 leading-relaxed">{item.description}</p>
+                        ) : null}
+                      </div>
+                      <span class="text-base font-medium text-stone-900 tabular-nums shrink-0 sm:pt-0.5">{item.price}</span>
+                    </div>
                   </div>
-                  <span class="text-base font-medium text-stone-900 tabular-nums shrink-0 sm:pt-0.5">{item.price}</span>
-                </div>
+                )}
               </div>
             ))}
           </div>

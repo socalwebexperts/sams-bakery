@@ -1,0 +1,103 @@
+---
+/**
+ * Global lightbox for menu item photos. Triggers: any element with
+ * `data-menu-photo`, `data-src` (image URL), optional `data-title`, `data-price`, `data-description`.
+ */
+---
+
+<dialog
+  id="menu-photo-lightbox"
+  class="menu-photo-dialog z-[100] m-0 max-h-dvh max-w-none h-full w-full overflow-y-auto border-0 bg-transparent p-4 sm:p-8"
+  aria-labelledby="menu-photo-lightbox-title"
+>
+  <div class="relative mx-auto flex min-h-full max-w-5xl flex-col items-center justify-center">
+    <button
+      type="button"
+      data-lightbox-close
+      class="absolute right-0 top-0 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-stone-700 shadow-md ring-1 ring-stone-200/80 transition hover:bg-white hover:text-stone-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+      aria-label="Close"
+    >
+      <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <div class="mt-12 w-full flex flex-col items-center sm:mt-10">
+      <img data-lightbox-img src="" alt="" class="max-h-[min(78vh,900px)] w-auto max-w-full rounded-sm object-contain shadow-2xl" />
+
+      <div class="mt-4 max-w-lg text-center">
+        <p id="menu-photo-lightbox-title" data-lightbox-caption class="font-serif text-lg text-white sm:text-xl"></p>
+        <p data-lightbox-desc class="mt-1 hidden text-sm text-white/75"></p>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .menu-photo-dialog::backdrop {
+    background: rgba(15, 23, 42, 0.82);
+    backdrop-filter: blur(4px);
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const dialog = document.getElementById("menu-photo-lightbox");
+    if (!dialog || typeof dialog.showModal !== "function") return;
+
+    const img = dialog.querySelector("[data-lightbox-img]");
+    const caption = dialog.querySelector("[data-lightbox-caption]");
+    const descEl = dialog.querySelector("[data-lightbox-desc]");
+    const closeBtn = dialog.querySelector("[data-lightbox-close]");
+
+    if (!img || !caption || !descEl || !closeBtn) return;
+
+    function openFromTrigger(trigger) {
+      const src = trigger.getAttribute("data-src");
+      if (!src) return;
+
+      const title = trigger.getAttribute("data-title") || "";
+      const price = trigger.getAttribute("data-price") || "";
+      const description = trigger.getAttribute("data-description") || "";
+
+      img.setAttribute("src", src);
+      img.setAttribute("alt", title || "Menu item");
+
+      caption.textContent = [title, price].filter(Boolean).join(" — ");
+
+      if (description) {
+        descEl.textContent = description;
+        descEl.classList.remove("hidden");
+      } else {
+        descEl.textContent = "";
+        descEl.classList.add("hidden");
+      }
+
+      dialog.showModal();
+    }
+
+    function closeDialog() {
+      dialog.close();
+    }
+
+    dialog.addEventListener("close", function () {
+      img.removeAttribute("src");
+      img.setAttribute("alt", "");
+    });
+
+    document.body.addEventListener("click", function (e) {
+      var t = e.target;
+      if (!t || !t.closest) return;
+      var trigger = t.closest("[data-menu-photo]");
+      if (!trigger) return;
+      e.preventDefault();
+      openFromTrigger(trigger);
+    });
+
+    closeBtn.addEventListener("click", closeDialog);
+
+    dialog.addEventListener("click", function (e) {
+      if (e.target === dialog) closeDialog();
+    });
+  })();
+</script>
