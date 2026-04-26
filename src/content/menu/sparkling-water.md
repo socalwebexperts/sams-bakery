@@ -1,7 +1,7 @@
 ---
 title: Sparkling water
 description: Carbonated water
-price: $1.90
+price: $2.00
 category: Drinks
 image: "/media/uploads/sparkling-water.jpg"
 ---

@@ -1,7 +1,7 @@
 ---
 title: Soda
 description: Assorted soft drinks
-price: $1.75
+price: $3.00
 category: Drinks
 image: "/media/uploads/soda.jpg"
 ---
