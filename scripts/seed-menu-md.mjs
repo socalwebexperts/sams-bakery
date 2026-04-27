@@ -28,6 +28,7 @@ const rows = [
   ["spinach-borek", "Spinach borek", "Spinach and cheese filling", "$3.00", "Boreks", "/media/uploads/spinach-borek.jpg"],
   ["beef-piroshki", "Beef piroshki", "Hand pie with seasoned beef", "$2.75", "Hot food", "/media/uploads/beef-piroshki.jpg"],
   ["potato-piroshki", "Potato piroshki", "Hand pie with potato filling", "$2.75", "Hot food", "/media/uploads/potato-piroshki.jpg"],
+  ["hotdog-sandwich", "Hotdog Sandwich", "", "$17.00", "Hot food", "/media/uploads/hotdog-sandwich.png"],
   ["ponchik", "Ponchik", "Filled doughnut", "$3.00", "Hot food", "/media/uploads/ponchik.jpg"],
   ["lahmajun", "Lahmajun", "Thin flatbread with seasoned meat and herbs", "$2.50", "Hot food", "/media/uploads/lahmajun.jpg"],
   ["chebureki", "Chebureki", "Crispy turnover with savory filling", "$5.50", "Hot food", null],
